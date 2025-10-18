@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suhail Zenic Portfolio</title>
+<title>Suhail Zenic - Premium Portfolio | Full-Stack Developer & AI Specialist</title>
+<meta name="description" content="Professional portfolio of Suhail Zenic - Expert Python & Java Developer specializing in Full-Stack Solutions, AI & Automation">
+<meta name="keywords" content="Python Developer, Java Developer, Full-Stack Developer, AI Specialist, Web Development, Automation">
 
 <!-- AOS CSS for animations -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -11,76 +13,555 @@
 <!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <!-- Custom CSS -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="#home">Suhail Zenic</a>
+        </div>
+        <div class="nav-menu" id="nav-menu">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#portfolio" class="nav-link">Portfolio</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#blog" class="nav-link">Insights</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-toggle" id="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>
+
 <!-- Hero Section -->
-<section class="hero">
-    <h1>Suhail Zenic</h1>
-    <p><span id="animated-text"></span></p>
-    <p>Python & Java Developer | Full-Stack Solutions | AI & Automation Enthusiast</p>
+<section id="home" class="hero">
+    <div class="hero-background">
+        <div class="hero-particles"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-text" data-aos="fade-up">
+            <h1 class="hero-title">Suhail Zenic</h1>
+            <p class="hero-subtitle"><span id="animated-text"></span></p>
+            <p class="hero-description">Python & Java Developer | Full-Stack Solutions | AI & Automation Specialist</p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-image" data-aos="fade-left">
+            <div class="hero-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="stats" data-aos="fade-up">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number" data-count="50">0</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number" data-count="3">0</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-number" data-count="15">0</div>
+                <div class="stat-label">Technologies</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">Passionate developer crafting digital solutions</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text" data-aos="fade-right">
+                <h3>Hello, I'm Suhail Zenic</h3>
+                <p>I'm a passionate full-stack developer with expertise in Python and Java, specializing in creating intelligent solutions through AI and automation. With a strong foundation in both frontend and backend technologies, I bring ideas to life through clean, efficient, and scalable code.</p>
+                <p>My journey in technology began with a fascination for problem-solving and has evolved into a career focused on building innovative applications that make a real difference. I believe in continuous learning and staying at the forefront of technological advancements.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>3+ Years of Experience</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Full-Stack Development</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>AI & Automation Expert</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Client-Focused Solutions</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image" data-aos="fade-left">
+                <div class="about-card">
+                    <div class="card-header">
+                        <h4>Professional Summary</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="summary-item">
+                            <strong>Specialization:</strong> Full-Stack Development
+                        </div>
+                        <div class="summary-item">
+                            <strong>Core Languages:</strong> Python, Java, JavaScript
+                        </div>
+                        <div class="summary-item">
+                            <strong>Focus Areas:</strong> AI, Automation, Web Apps
+                        </div>
+                        <div class="summary-item">
+                            <strong>Approach:</strong> Clean, Scalable, User-Centric
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Skills Section -->
-<section class="skills" data-aos="fade-up">
-  <h2>My Skills</h2>
-  <div class="skills-container">
-    <div class="skill-card" data-aos="fade-up">
-      <i class="fab fa-python fa-3x"></i>
-      <h3>Python</h3>
-      <p>Backend Development, AI, Automation</p>
+<section id="skills" class="skills">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Technologies I work with</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category" data-aos="fade-up">
+                <h3>Programming Languages</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Python</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Java</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                <h3>Frameworks & Libraries</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Django/Flask</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>React/Vue.js</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Node.js</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                <h3>AI & Automation</h3>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Machine Learning</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Chatbots</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Process Automation</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-      <i class="fab fa-java fa-3x"></i>
-      <h3>Java</h3>
-      <p>OOP, Enterprise Applications</p>
-    </div>
-    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-      <i class="fas fa-robot fa-3x"></i>
-      <h3>AI & Automation</h3>
-      <p>Intelligent Bots, Process Automation</p>
-    </div>
-    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-      <i class="fas fa-code fa-3x"></i>
-      <h3>Web Development</h3>
-      <p>Full-Stack Applications, APIs</p>
-    </div>
-  </div>
 </section>
 
-<!-- Projects Section -->
-<section class="projects" data-aos="fade-up">
-  <h2>My Projects</h2>
+<!-- Portfolio Section -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Some of my recent work</p>
+        </div>
+        <div class="portfolio-filter" data-aos="fade-up">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Apps</button>
+            <button class="filter-btn" data-filter="ai">AI & Automation</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-category="web" data-aos="fade-up">
+                <div class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3>Real-Time Chat App</h3>
+                        <p>Node.js application with Socket.io for real-time messaging</p>
+                        <div class="portfolio-links">
+                            <a href="https://github.com/suhail-zenic/Real-Time-Chat-App.git" target="_blank" class="portfolio-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="ai" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3>Einstein Bot</h3>
+                        <p>AI chatbot with intelligent responses and automation</p>
+                        <div class="portfolio-links">
+                            <a href="https://github.com/suhail-zenic/Einstein-chat.git" target="_blank" class="portfolio-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="200">
+                <div class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3>To-Do Application</h3>
+                        <p>Full-stack solution with Python backend integration</p>
+                        <div class="portfolio-links">
+                            <a href="https://github.com/suhail-zenic/My-To-Do-app.git" target="_blank" class="portfolio-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-  <div class="project" data-aos="fade-up">
-    <h3>Real-Time Chat App</h3>
-    <p>A Node.js app demonstrating real-time messaging with Socket.io.</p>
-    <a href="https://github.com/suhail-zenic/Real-Time-Chat-App.git" target="_blank">View on GitHub</a>
-  </div>
+<!-- Services Section -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Services I Offer</h2>
+            <p class="section-subtitle">Comprehensive development solutions</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Custom web applications built with modern technologies, responsive design, and optimal performance.</p>
+                <ul class="service-features">
+                    <li>Frontend Development</li>
+                    <li>Backend APIs</li>
+                    <li>Database Design</li>
+                    <li>Performance Optimization</li>
+                </ul>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI & Automation</h3>
+                <p>Intelligent solutions that automate processes and enhance user experiences through AI technology.</p>
+                <ul class="service-features">
+                    <li>Chatbot Development</li>
+                    <li>Process Automation</li>
+                    <li>Machine Learning</li>
+                    <li>Data Analysis</li>
+                </ul>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Development</h3>
+                <p>Cross-platform mobile applications that deliver seamless user experiences across all devices.</p>
+                <ul class="service-features">
+                    <li>Responsive Design</li>
+                    <li>Cross-Platform Apps</li>
+                    <li>UI/UX Design</li>
+                    <li>App Store Deployment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-  <div class="project" data-aos="fade-up" data-aos-delay="100">
-    <h3>Einstein Bot</h3>
-    <p>An AI chatbot built with Python, showcasing automation and intelligent responses.</p>
-    <a href="https://github.com/suhail-zenic/Einstein-chat.git" target="_blank">View on GitHub</a>
-  </div>
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Client Testimonials</h2>
+            <p class="section-subtitle">What clients say about my work</p>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial-item active" data-aos="fade-up">
+                <div class="testimonial-content">
+                    <div class="testimonial-text">
+                        <p>"Suhail delivered an exceptional web application that exceeded our expectations. His attention to detail and technical expertise made the entire process smooth and professional."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <span>CEO, TechStart Inc.</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item" data-aos="fade-up">
+                <div class="testimonial-content">
+                    <div class="testimonial-text">
+                        <p>"The AI automation solution Suhail created has revolutionized our workflow. We've seen a 40% increase in efficiency since implementation."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <span>Operations Director, InnovateCorp</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-  <div class="project" data-aos="fade-up" data-aos-delay="200">
-    <h3>To-Do App</h3>
-    <p>A full-stack solution demonstrating frontend and backend integration using Python.</p>
-    <a href="https://github.com/suhail-zenic/My-To-Do-app.git" target="_blank">View on GitHub</a>
-  </div>
+<!-- Blog Section -->
+<section id="blog" class="blog">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Latest Insights</h2>
+            <p class="section-subtitle">Thoughts on technology and development</p>
+        </div>
+        <div class="blog-grid">
+            <article class="blog-card" data-aos="fade-up">
+                <div class="blog-image">
+                    <div class="blog-category">AI & Automation</div>
+                </div>
+                <div class="blog-content">
+                    <h3>The Future of AI in Web Development</h3>
+                    <p>Exploring how artificial intelligence is reshaping the way we build and interact with web applications.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date">Dec 15, 2024</span>
+                        <a href="#" class="blog-read-more">Read More</a>
+                    </div>
+                </div>
+            </article>
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="blog-image">
+                    <div class="blog-category">Development</div>
+                </div>
+                <div class="blog-content">
+                    <h3>Building Scalable Python Applications</h3>
+                    <p>Best practices and patterns for creating maintainable and scalable Python applications.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date">Dec 10, 2024</span>
+                        <a href="#" class="blog-read-more">Read More</a>
+                    </div>
+                </div>
+            </article>
+            <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="blog-image">
+                    <div class="blog-category">Technology</div>
+                </div>
+                <div class="blog-content">
+                    <h3>Modern Web Development Trends 2024</h3>
+                    <p>A comprehensive look at the latest trends shaping the future of web development.</p>
+                    <div class="blog-meta">
+                        <span class="blog-date">Dec 5, 2024</span>
+                        <a href="#" class="blog-read-more">Read More</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
 </section>
 
 <!-- Contact Section -->
-<section class="contact" data-aos="fade-up">
-  <h2>Contact Me</h2>
-  <p>📧 <a href="mailto:suhail.codes99@gmail.com" class="contact-btn">suhailcodes99@gmail.com</a></p>
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's discuss your next project</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info" data-aos="fade-right">
+                <h3>Let's Start a Conversation</h3>
+                <p>I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>suhail.codes99@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Available Worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>&copy; 2024 Suhail Zenic. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <!-- Dark Mode Button -->
-<button id="darkModeBtn">🌙</button>
+<button id="darkModeBtn" class="dark-mode-btn">
+    <i class="fas fa-moon"></i>
+</button>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
