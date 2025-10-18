@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaUsers, FaAward, FaRocket } from 'react-icons/fa';
@@ -14,7 +14,7 @@ const Stats = () => {
     technologies: 0
   });
 
-  const stats = [
+  const stats = useMemo(() => [
     {
       icon: FaCode,
       target: 50,
@@ -47,7 +47,7 @@ const Stats = () => {
       suffix: '+',
       color: '#8b5cf6'
     }
-  ];
+  ], []);
 
   useEffect(() => {
     if (isInView) {
@@ -73,7 +73,7 @@ const Stats = () => {
         }, stepDuration);
       });
     }
-  }, [isInView]);
+  }, [isInView, stats]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
