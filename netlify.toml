@@ -6,11 +6,12 @@
   publish = "build"
   
   # Default build command
-  command = "npm run build"
+  command = "npm ci && npm run build"
 
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
+  NPM_FLAGS = "--production=false"
 
 # Redirect rules for React Router
 [[redirects]]
