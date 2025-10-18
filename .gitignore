@@ -85,7 +85,7 @@ jspm_packages/
 
 # Gatsby files
 .cache/
-public
+# public (commented out for React - we need public/index.html)
 
 # Storybook build outputs
 .out
