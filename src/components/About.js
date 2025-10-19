@@ -1,17 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCheckCircle, FaCode, FaRobot, FaShopify, FaRocket, FaUsers, FaAward } from 'react-icons/fa';
+import { FaCheckCircle, FaCode, FaRobot, FaShopify } from 'react-icons/fa';
 
 const About = () => {
-  const achievements = [
-    { icon: FaCode, number: '50+', label: 'Projects Completed' },
-    { icon: FaUsers, number: '25+', label: 'Happy Clients' },
-    { icon: FaAward, number: '3+', label: 'Years Experience' },
-    { icon: FaRocket, number: '15+', label: 'Technologies' }
-  ];
 
   const features = [
-    '3+ Years of Experience',
     'Full-Stack Development',
     'Shopify Specialist',
     'AI & Automation Expert',
@@ -190,27 +183,6 @@ const About = () => {
               </motion.div>
             </div>
 
-            <motion.div
-              className="achievements-grid"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={achievement.label}
-                  className="achievement-item"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <achievement.icon className="achievement-icon" />
-                  <div className="achievement-number">{achievement.number}</div>
-                  <div className="achievement-label">{achievement.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
       </div>

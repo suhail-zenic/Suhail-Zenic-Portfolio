@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaShopify } from 'react-icons/fa';
+import { FaShopify } from 'react-icons/fa';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -14,19 +14,7 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const socialLinks = [
-    { icon: FaGithub, href: '#', label: 'GitHub' },
-    { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-    { icon: FaTwitter, href: '#', label: 'Twitter' },
-    { icon: FaInstagram, href: '#', label: 'Instagram' }
-  ];
 
-  const scrollToSection = (sectionId) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="home" className="hero">
@@ -77,51 +65,7 @@ const Hero = () => {
               Specializing in web development, Shopify stores, and intelligent automation solutions.
             </motion.p>
 
-            <motion.div
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <motion.button
-                className="btn btn-primary"
-                onClick={() => scrollToSection('#portfolio')}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View My Work
-              </motion.button>
-              <motion.button
-                className="btn btn-secondary"
-                onClick={() => scrollToSection('#contact')}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get In Touch
-              </motion.button>
-            </motion.div>
 
-            <motion.div
-              className="hero-social"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-            >
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  className="social-link"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2 + index * 0.1 }}
-                >
-                  <social.icon />
-                </motion.a>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
 
@@ -162,7 +106,7 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <div className="scroll-arrow" onClick={() => scrollToSection('#about')}>
+        <div className="scroll-arrow" onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
           <div className="scroll-line" />
           <div className="scroll-text">Scroll Down</div>
         </div>
