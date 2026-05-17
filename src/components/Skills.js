@@ -1,72 +1,56 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FaPython, 
-  FaJava, 
-  FaJs, 
-  FaReact, 
-  FaNodeJs, 
-  FaShopify, 
-  FaRobot, 
-  FaDatabase,
-  FaCloud,
-  FaMobile,
+import {
+  FaShopify,
   FaCode,
-  FaServer
+  FaDatabase,
+  FaPlug,
+  FaTachometerAlt,
+  FaLayerGroup
 } from 'react-icons/fa';
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('languages');
+  const [activeCategory, setActiveCategory] = useState('storefront');
 
   const skillCategories = {
-    languages: {
-      title: 'Programming Languages',
-      icon: FaCode,
+    storefront: {
+      title: 'Themes & storefront',
+      icon: FaLayerGroup,
       skills: [
-        { name: 'Python', level: 95, icon: FaPython, color: '#3776ab' },
-        { name: 'Java', level: 90, icon: FaJava, color: '#f89820' },
-        { name: 'JavaScript', level: 85, icon: FaJs, color: '#f7df1e' },
-        { name: 'TypeScript', level: 80, icon: FaJs, color: '#3178c6' }
+        { name: 'Liquid & OS 2.0 sections', level: 95, icon: FaCode, color: '#96bf48' },
+        { name: 'JSON templates & navigation', level: 90, icon: FaShopify, color: '#96bf48' },
+        { name: 'Cart, discounts, and line item properties', level: 88, icon: FaShopify, color: '#96bf48' },
+        { name: 'Storefront API & headless handoffs', level: 82, icon: FaCode, color: '#96bf48' }
       ]
     },
-    frameworks: {
-      title: 'Frameworks & Libraries',
-      icon: FaReact,
+    platform: {
+      title: 'Merchant admin & data',
+      icon: FaDatabase,
       skills: [
-        { name: 'React', level: 90, icon: FaReact, color: '#61dafb' },
-        { name: 'Node.js', level: 85, icon: FaNodeJs, color: '#339933' },
-        { name: 'Django/Flask', level: 90, icon: FaPython, color: '#092e20' },
-        { name: 'Express.js', level: 85, icon: FaServer, color: '#000000' }
+        { name: 'Metafields & metaobjects', level: 92, icon: FaDatabase, color: '#5c8f3e' },
+        { name: 'Markets, taxes, and selling internationally', level: 85, icon: FaShopify, color: '#5c8f3e' },
+        { name: 'B2B catalogs & price lists', level: 80, icon: FaShopify, color: '#5c8f3e' },
+        { name: 'Shopify Flow & automation', level: 84, icon: FaShopify, color: '#5c8f3e' }
       ]
     },
-    ecommerce: {
-      title: 'E-commerce & Shopify',
+    apps: {
+      title: 'Apps & custom backend',
       icon: FaShopify,
       skills: [
-        { name: 'Shopify Development', level: 95, icon: FaShopify, color: '#96bf48' },
-        { name: 'Shopify Apps', level: 90, icon: FaShopify, color: '#96bf48' },
-        { name: 'Liquid Templating', level: 95, icon: FaCode, color: '#96bf48' },
-        { name: 'Shopify Plus', level: 85, icon: FaShopify, color: '#96bf48' }
+        { name: 'Admin GraphQL & bulk operations', level: 88, icon: FaShopify, color: '#6366f1' },
+        { name: 'Webhooks & idempotent workers', level: 90, icon: FaCode, color: '#6366f1' },
+        { name: 'App Bridge & embedded admin UX', level: 82, icon: FaShopify, color: '#6366f1' },
+        { name: 'Private apps & middleware', level: 86, icon: FaPlug, color: '#6366f1' }
       ]
     },
-    ai: {
-      title: 'AI & Automation',
-      icon: FaRobot,
+    delivery: {
+      title: 'Launch quality',
+      icon: FaTachometerAlt,
       skills: [
-        { name: 'Machine Learning', level: 85, icon: FaRobot, color: '#ff6b6b' },
-        { name: 'Chatbots', level: 90, icon: FaRobot, color: '#4ecdc4' },
-        { name: 'Process Automation', level: 88, icon: FaRobot, color: '#45b7d1' },
-        { name: 'Data Analysis', level: 80, icon: FaDatabase, color: '#96ceb4' }
-      ]
-    },
-    tools: {
-      title: 'Tools & Technologies',
-      icon: FaCloud,
-      skills: [
-        { name: 'Git & GitHub', level: 90, icon: FaCode, color: '#f05032' },
-        { name: 'AWS/Cloud', level: 80, icon: FaCloud, color: '#ff9900' },
-        { name: 'Docker', level: 75, icon: FaServer, color: '#2496ed' },
-        { name: 'Mobile Development', level: 70, icon: FaMobile, color: '#007aff' }
+        { name: 'Core Web Vitals on the theme', level: 88, icon: FaTachometerAlt, color: '#0d9488' },
+        { name: 'Theme Check & CI for Liquid', level: 85, icon: FaCode, color: '#0d9488' },
+        { name: 'Analytics, pixels, and consent', level: 83, icon: FaPlug, color: '#0d9488' },
+        { name: 'Checkout extensibility (where applicable)', level: 78, icon: FaShopify, color: '#0d9488' }
       ]
     }
   };
@@ -102,8 +86,8 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Technical Skills</h2>
-          <p className="section-subtitle">Technologies and tools I work with</p>
+          <h2 className="section-title">Shopify stack</h2>
+          <p className="section-subtitle">Where I spend time on a typical build</p>
         </motion.div>
 
         <motion.div
@@ -116,6 +100,7 @@ const Skills = () => {
           {Object.keys(skillCategories).map((categoryKey) => (
             <motion.button
               key={categoryKey}
+              type="button"
               className={`category-btn ${activeCategory === categoryKey ? 'active' : ''}`}
               onClick={() => setActiveCategory(categoryKey)}
               whileHover={{ scale: 1.05 }}
@@ -134,10 +119,7 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.div
-            className="skills-grid"
-            variants={itemVariants}
-          >
+          <motion.div className="skills-grid" variants={itemVariants}>
             {skillCategories[activeCategory].skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
@@ -179,18 +161,18 @@ const Skills = () => {
         >
           <div className="highlight-card">
             <FaShopify className="highlight-icon" />
-            <h3>Shopify Expert</h3>
-            <p>Specialized in building custom Shopify stores, apps, and integrations</p>
+            <h3>Theme work</h3>
+            <p>Layouts that survive real catalogs, promos, and mobile traffic—not just the mockups.</p>
           </div>
           <div className="highlight-card">
-            <FaRobot className="highlight-icon" />
-            <h3>AI & Automation</h3>
-            <p>Creating intelligent solutions that streamline business processes</p>
+            <FaPlug className="highlight-icon" />
+            <h3>Integrations</h3>
+            <p>ERP, 3PL, subscriptions, and email: fewer moving parts, clearer ownership when something breaks.</p>
           </div>
           <div className="highlight-card">
-            <FaCode className="highlight-icon" />
-            <h3>Full-Stack Development</h3>
-            <p>End-to-end development from frontend to backend systems</p>
+            <FaTachometerAlt className="highlight-icon" />
+            <h3>Speed &amp; stability</h3>
+            <p>Lighthouse and field data matter; I trim scripts, fix render-blocking paths, and retest after every app install.</p>
           </div>
         </motion.div>
       </div>

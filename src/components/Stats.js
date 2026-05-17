@@ -1,72 +1,75 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FaCode, FaUsers, FaAward, FaRocket } from 'react-icons/fa';
+import { FaStore, FaShippingFast, FaUsers, FaCalendarAlt } from 'react-icons/fa';
 
 const Stats = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   const [counts, setCounts] = useState({
-    projectscompleted: 0,
-    happyclients: 0,
-    yearsexperience: 0,
-    technologies: 0
+    storeslive: 0,
+    themeslaunched: 0,
+    merchants: 0,
+    years: 0
   });
 
-  const stats = useMemo(() => [
-    {
-      icon: FaCode,
-      target: 50,
-      label: 'Projects Completed',
-      key: 'projectscompleted',
-      suffix: '+',
-      color: '#6366f1'
-    },
-    {
-      icon: FaUsers,
-      target: 25,
-      label: 'Happy Clients',
-      key: 'happyclients',
-      suffix: '+',
-      color: '#10b981'
-    },
-    {
-      icon: FaAward,
-      target: 3,
-      label: 'Years Experience',
-      key: 'yearsexperience',
-      suffix: '+',
-      color: '#f59e0b'
-    },
-    {
-      icon: FaRocket,
-      target: 15,
-      label: 'Technologies',
-      key: 'technologies',
-      suffix: '+',
-      color: '#8b5cf6'
-    }
-  ], []);
+  const stats = useMemo(
+    () => [
+      {
+        icon: FaStore,
+        target: 28,
+        label: 'Shopify launches & relaunches',
+        key: 'storeslive',
+        suffix: '+',
+        color: '#96bf48'
+      },
+      {
+        icon: FaShippingFast,
+        target: 40,
+        label: 'Theme and checkout ship tickets',
+        key: 'themeslaunched',
+        suffix: '+',
+        color: '#5c8f3e'
+      },
+      {
+        icon: FaUsers,
+        target: 18,
+        label: 'Merchants & partners I work with directly',
+        key: 'merchants',
+        suffix: '+',
+        color: '#6366f1'
+      },
+      {
+        icon: FaCalendarAlt,
+        target: 4,
+        label: 'Years focused on Shopify',
+        key: 'years',
+        suffix: '+',
+        color: '#f59e0b'
+      }
+    ],
+    []
+  );
 
   useEffect(() => {
     if (isInView) {
-      const duration = 2000; // 2 seconds
+      const duration = 2000;
       const steps = 60;
       const stepDuration = duration / steps;
 
-      stats.forEach((stat, index) => {
+      stats.forEach((stat) => {
         let current = 0;
         const increment = stat.target / steps;
-        
+
         const timer = setInterval(() => {
           current += increment;
           if (current >= stat.target) {
             current = stat.target;
             clearInterval(timer);
           }
-          
-          setCounts(prev => ({
+
+          setCounts((prev) => ({
             ...prev,
             [stat.key]: Math.floor(current)
           }));
@@ -122,16 +125,14 @@ const Stats = () => {
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 200, 
+                transition={{
+                  type: 'spring',
+                  stiffness: 200,
                   damping: 10,
                   delay: index * 0.1
                 }}
               >
-                {isInView ? (
-                  counts[stat.key] || 0
-                ) : 0}
+                {isInView ? counts[stat.key] || 0 : 0}
                 {stat.suffix}
               </motion.div>
               <div className="stat-label">{stat.label}</div>

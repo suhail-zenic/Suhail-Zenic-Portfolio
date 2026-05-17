@@ -9,28 +9,32 @@ const Footer = () => {
     quick: [
       { name: 'Home', href: '#home' },
       { name: 'About', href: '#about' },
-      { name: 'Skills', href: '#skills' },
-      { name: 'Portfolio', href: '#portfolio' }
+      { name: 'Stack', href: '#skills' },
+      { name: 'Work', href: '#portfolio' }
     ],
     services: [
-      { name: 'Web Development', href: '#services' },
-      { name: 'Shopify Development', href: '#services' },
-      { name: 'AI & Automation', href: '#services' },
-      { name: 'Mobile Development', href: '#services' }
+      { name: 'Themes & storefront', href: '#services' },
+      { name: 'Migrations', href: '#services' },
+      { name: 'Custom apps', href: '#services' },
+      { name: 'Integrations & ops', href: '#services' }
     ],
     resources: [
-      { name: 'Blog', href: '#blog' },
-      { name: 'Testimonials', href: '#testimonials' },
+      { name: 'Notes', href: '#blog' },
+      { name: 'Clients', href: '#testimonials' },
       { name: 'Contact', href: '#contact' },
       { name: 'Privacy Policy', href: '#' }
     ]
   };
 
   const socialLinks = [
-    { icon: FaGithub, href: '#', label: 'GitHub' },
-    { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-    { icon: FaTwitter, href: '#', label: 'Twitter' },
-    { icon: FaInstagram, href: '#', label: 'Instagram' }
+    { icon: FaGithub, href: 'https://github.com/suhail-zenic', label: 'GitHub' },
+    {
+      icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/suhail-majeed-449478369',
+      label: 'LinkedIn'
+    },
+    { icon: FaTwitter, href: 'https://x.com/suhailzenic', label: 'X' },
+    { icon: FaInstagram, href: 'https://www.instagram.com/suhailx777', label: 'Instagram' }
   ];
 
   const scrollToTop = () => {
@@ -56,16 +60,19 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="footer-brand">
-              <h3>Suhail Zenic</h3>
+              <h3>Suhail Majeed</h3>
               <p>
-                Full-Stack Developer & Shopify Specialist crafting exceptional 
-                digital experiences with modern technologies and innovative solutions.
+                Independent Shopify developer: themes, custom apps, migrations, and the integrations around fulfillment
+                and finance. Based online—shipping for merchants and agencies.
               </p>
               <div className="footer-social">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="social-link"
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
@@ -151,8 +158,8 @@ const Footer = () => {
           >
             <div className="footer-copyright">
               <p>
-                &copy; {currentYear} Suhail Zenic. All rights reserved. 
-                Made with <FaHeart className="heart-icon" /> and modern technologies.
+                &copy; {currentYear} Suhail Majeed. All rights reserved. 
+                Built with <FaHeart className="heart-icon" /> and a lot of Liquid.
               </p>
             </div>
 

@@ -74,8 +74,8 @@ function App() {
           transition={{ duration: 0.5 }}
         >
           <div className="loading-spinner"></div>
-          <h2>Suhail Zenic</h2>
-          <p>Loading Portfolio...</p>
+          <h2>Suhail Majeed</h2>
+          <p>Loading storefront…</p>
         </motion.div>
       </div>
     );

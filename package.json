@@ -1,7 +1,7 @@
 {
   "name": "suhail-zenic-portfolio",
   "version": "1.0.0",
-  "description": "Premium React Portfolio for Suhail Zenic - Full-Stack Developer & Shopify Specialist",
+  "description": "Portfolio site for Suhail Zenic — Shopify themes, apps, migrations, and integrations.",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",

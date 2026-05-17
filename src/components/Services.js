@@ -1,107 +1,113 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FaCode, 
-  FaShopify, 
-  FaRobot, 
-  FaMobile, 
-  FaCloud, 
-  FaChartLine,
+import {
+  FaShopify,
+  FaExchangeAlt,
+  FaPuzzlePiece,
+  FaTruck,
+  FaTachometerAlt,
+  FaHandshake,
   FaCog,
-  FaRocket
+  FaArrowRight
 } from 'react-icons/fa';
 
 const Services = () => {
   const services = [
     {
       icon: FaShopify,
-      title: 'Shopify Development',
-      description: 'Complete Shopify store development, customization, and optimization for maximum conversion rates.',
+      title: 'Themes & UX on Shopify',
+      description:
+        'Online Store 2.0 builds, section libraries, PDP/PLP patterns, and cart flows that match how your team actually merchandises.',
       features: [
-        'Custom Theme Development',
-        'Shopify App Development',
-        'Store Migration & Setup',
-        'Performance Optimization',
-        'Liquid Template Customization',
-        'Shopify Plus Solutions'
+        'Custom or Dawn-based themes',
+        'Editor-safe sections and presets',
+        'Mobile-first layout and typography',
+        'Accessible components and forms',
+        'Internationalization with Markets',
+        'Launch checklist and QA pass'
       ],
       color: '#96bf48',
-      gradient: 'linear-gradient(135deg, #96bf48 0%, #7ba05b 100%)'
+      gradient: 'linear-gradient(135deg, #96bf48 0%, #5c8f3e 100%)'
     },
     {
-      icon: FaCode,
-      title: 'Web Development',
-      description: 'Modern, responsive web applications built with cutting-edge technologies and best practices.',
+      icon: FaExchangeAlt,
+      title: 'Migrations & replatforming',
+      description:
+        'Moving off WooCommerce, Magento, or an older Shopify theme without losing URLs, customers, or order history you still need.',
       features: [
-        'Frontend Development (React, Vue)',
-        'Backend APIs (Python, Node.js)',
-        'Database Design & Optimization',
-        'Responsive Design',
-        'Performance Optimization',
-        'SEO Implementation'
+        'URL and redirect planning',
+        'Product, customer, and order imports',
+        '301 map and Search Console handoff',
+        'Payment and tax sanity check',
+        'Parallel run before DNS cutover',
+        'Post-launch monitoring window'
       ],
       color: '#6366f1',
-      gradient: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+      gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
     },
     {
-      icon: FaRobot,
-      title: 'AI & Automation',
-      description: 'Intelligent solutions that automate processes and enhance user experiences through AI technology.',
+      icon: FaPuzzlePiece,
+      title: 'Custom & private apps',
+      description:
+        'When Flow, discounts, or an existing app cannot cover the edge case: tight Admin API usage, webhooks, and serverless workers.',
       features: [
-        'Chatbot Development',
-        'Process Automation',
-        'Machine Learning Models',
-        'Data Analysis & Insights',
-        'Workflow Automation',
-        'AI Integration'
+        'Admin GraphQL mutations and reads',
+        'Idempotent webhook handlers',
+        'Bulk operations for large catalogs',
+        'Embedded admin with App Bridge',
+        'Secrets, rotation, and logging',
+        'Documentation your team can run'
+      ],
+      color: '#0d9488',
+      gradient: 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)'
+    },
+    {
+      icon: FaTruck,
+      title: 'Ops integrations',
+      description:
+        'Shopify talking cleanly to 3PL, ERP, subscriptions, and email—fewer CSVs, fewer “we think it synced” moments.',
+      features: [
+        'Inventory and fulfillment sync',
+        'Carrier accounts and rate logic',
+        'Subscription platform handoffs',
+        'Klaviyo / ESP event hygiene',
+        'Fraud and payment edge cases',
+        'Runbooks for support'
       ],
       color: '#f59e0b',
-      gradient: 'linear-gradient(135deg, #f59e0b 0%, #f97316 100%)'
+      gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
     },
     {
-      icon: FaMobile,
-      title: 'Mobile Development',
-      description: 'Cross-platform mobile applications that deliver seamless user experiences across all devices.',
+      icon: FaTachometerAlt,
+      title: 'Performance & measurement',
+      description:
+        'Theme-side speed work, third-party script audits, and analytics that still respect consent and checkout constraints.',
       features: [
-        'React Native Development',
-        'Progressive Web Apps',
-        'Mobile-First Design',
-        'App Store Deployment',
-        'Performance Optimization',
-        'Cross-Platform Solutions'
-      ],
-      color: '#10b981',
-      gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
-    },
-    {
-      icon: FaCloud,
-      title: 'Cloud Solutions',
-      description: 'Scalable cloud infrastructure and deployment solutions for modern applications.',
-      features: [
-        'AWS/Google Cloud Setup',
-        'Docker Containerization',
-        'CI/CD Pipeline Setup',
-        'Serverless Architecture',
-        'Database Management',
-        'Security Implementation'
+        'Real-device profiling, not vanity scores',
+        'Script removal and defer strategy',
+        'GA4 / pixel placement review',
+        'Search and filtering that scales',
+        'Image and video delivery pass',
+        'Monitoring after app changes'
       ],
       color: '#8b5cf6',
-      gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
+      gradient: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)'
     },
     {
-      icon: FaChartLine,
-      title: 'E-commerce Solutions',
-      description: 'Complete e-commerce solutions including store setup, payment integration, and analytics.',
+      icon: FaHandshake,
+      title: 'Retainers & partner support',
+      description:
+        'For teams that want a Shopify-native developer on Slack for fixes, small features, and pre-sale technical questions.',
       features: [
-        'Multi-Platform Integration',
-        'Payment Gateway Setup',
-        'Inventory Management',
-        'Analytics & Reporting',
-        'Marketing Automation',
-        'Customer Experience Optimization'
+        'Monthly hours with clear scope',
+        'Theme and app incident response',
+        'Staging → production discipline',
+        'Office hours with stakeholders',
+        'Handover notes for internal devs',
+        'Roadmap grooming for Shopify'
       ],
       color: '#ef4444',
-      gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
+      gradient: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)'
     }
   ];
 
@@ -136,8 +142,8 @@ const Services = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Services I Offer</h2>
-          <p className="section-subtitle">Comprehensive development solutions tailored to your needs</p>
+          <h2 className="section-title">What I take on</h2>
+          <p className="section-subtitle">Shopify-only engagements, scoped like a product team</p>
         </motion.div>
 
         <motion.div
@@ -147,22 +153,22 @@ const Services = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {services.map((service, index) => (
+          {services.map((service) => (
             <motion.div
               key={service.title}
               className="service-card"
               variants={cardVariants}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 y: -10,
                 transition: { duration: 0.2 }
               }}
               whileTap={{ scale: 0.95 }}
             >
               <div className="service-header">
-                <div 
+                <div
                   className="service-icon"
-                  style={{ 
+                  style={{
                     background: service.gradient,
                     color: 'white'
                   }}
@@ -171,17 +177,17 @@ const Services = () => {
                 </div>
                 <h3>{service.title}</h3>
               </div>
-              
+
               <p className="service-description">{service.description}</p>
-              
+
               <ul className="service-features">
-                {service.features.map((feature, featureIndex) => (
+                {service.features.map((feature) => (
                   <motion.li
                     key={feature}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: featureIndex * 0.1 }}
+                    transition={{ delay: 0.05 }}
                   >
                     <FaCog className="feature-icon" />
                     {feature}
@@ -189,18 +195,28 @@ const Services = () => {
                 ))}
               </ul>
 
-              <motion.button
+              <motion.a
+                href="#contact"
                 className="service-btn"
-                style={{ 
+                style={{
                   background: service.gradient,
-                  color: 'white'
+                  color: 'white',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem'
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
-                Learn More
-                <FaRocket className="btn-icon" />
-              </motion.button>
+                Discuss this
+                <FaArrowRight className="btn-icon" />
+              </motion.a>
             </motion.div>
           ))}
         </motion.div>
@@ -213,34 +229,33 @@ const Services = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="cta-content">
-            <h3>Ready to Start Your Project?</h3>
-            <p>Let's discuss how I can help bring your ideas to life with cutting-edge technology and expert development.</p>
+            <h3>Have a messy brief?</h3>
+            <p>
+              Send the store URL, what is broken or missing, and any hard dates. I will reply with what belongs in
+              Liquid, what belongs in an app, and what should stay in ops.
+            </p>
             <div className="cta-buttons">
               <motion.button
+                type="button"
                 className="btn btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  const element = document.querySelector('#contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
+                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Get Started
+                Email a scope
               </motion.button>
               <motion.button
+                type="button"
                 className="btn btn-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  const element = document.querySelector('#portfolio');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
+                  document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                View Portfolio
+                Browse work samples
               </motion.button>
             </div>
           </div>

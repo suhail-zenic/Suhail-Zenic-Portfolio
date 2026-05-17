@@ -18,11 +18,11 @@ const Navbar = ({ darkMode }) => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'Stack', href: '#skills' },
+    { name: 'Work', href: '#portfolio' },
     { name: 'Services', href: '#services' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Insights', href: '#blog' },
+    { name: 'Clients', href: '#testimonials' },
+    { name: 'Notes', href: '#blog' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -48,7 +48,8 @@ const Navbar = ({ darkMode }) => {
           whileTap={{ scale: 0.95 }}
         >
           <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}>
-            Suhail Zenic
+            <span className="name-first">Suhail</span>{' '}
+            <span className="name-last">Majeed</span>
           </a>
         </motion.div>
 

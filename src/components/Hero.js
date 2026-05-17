@@ -14,12 +14,10 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-
-
   return (
     <section id="home" className="hero">
       <div className="hero-background">
-        <div 
+        <div
           className="hero-particles"
           style={{
             transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
@@ -41,7 +39,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Suhail Zenic
+              <span className="name-first">Suhail</span>{' '}
+              <span className="name-last">Majeed</span>
             </motion.h1>
 
             <motion.div
@@ -50,9 +49,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <span className="hero-role">
-                Full-Stack Developer & Shopify Expert
-              </span>
+              <span className="hero-role">Shopify developer</span>
             </motion.div>
 
             <motion.p
@@ -61,11 +58,9 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Crafting exceptional digital experiences with modern technologies. 
-              Specializing in web development, Shopify stores, and intelligent automation solutions.
+              I build and fix Shopify stores: Online Store 2.0 themes, Liquid, checkout and cart
+              edge cases, lightweight custom apps, and the integrations merchants actually rely on.
             </motion.p>
-
-
           </motion.div>
         </div>
 
@@ -83,16 +78,16 @@ const Hero = () => {
               <div className="avatar-ring" />
               <div className="floating-elements">
                 <div className="floating-element element-1">
-                  <span>Python</span>
+                  <span>Liquid</span>
                 </div>
                 <div className="floating-element element-2">
-                  <span>Java</span>
+                  <span>OS 2.0</span>
                 </div>
                 <div className="floating-element element-3">
-                  <span>Shopify</span>
+                  <span>Apps</span>
                 </div>
                 <div className="floating-element element-4">
-                  <span>AI</span>
+                  <span>Checkout</span>
                 </div>
               </div>
             </div>
@@ -106,9 +101,20 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <div className="scroll-arrow" onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}>
+        <div
+          className="scroll-arrow"
+          onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+            }
+          }}
+          role="button"
+          tabIndex={0}
+        >
           <div className="scroll-line" />
-          <div className="scroll-text">Scroll Down</div>
+          <div className="scroll-text">Scroll</div>
         </div>
       </motion.div>
     </section>

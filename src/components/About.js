@@ -1,17 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCheckCircle, FaCode, FaRobot, FaShopify } from 'react-icons/fa';
+import { FaCheckCircle, FaCode, FaShopify, FaPlug } from 'react-icons/fa';
 
 const About = () => {
-
   const features = [
-    'Full-Stack Development',
-    'Shopify Specialist',
-    'AI & Automation Expert',
-    'Client-Focused Solutions',
-    'Modern Technologies'
+    'Online Store 2.0 themes and section architecture',
+    'Custom and private Shopify apps when off-the-shelf is not enough',
+    'Metafields, metaobjects, and clean content models',
+    'Migrations, 3PL, subscriptions, and the messy middle',
+    'Performance: real Core Web Vitals work, not checkbox SEO'
   ];
-
 
   return (
     <section id="about" className="about section">
@@ -23,8 +21,8 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">About Me</h2>
-          <p className="section-subtitle">Passionate developer crafting digital solutions</p>
+          <h2 className="section-title">About</h2>
+          <p className="section-subtitle">Shopify is the product; I ship the parts merchants touch</p>
         </motion.div>
 
         <div className="about-content">
@@ -35,19 +33,19 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3>Hello, I'm Suhail Zenic</h3>
+            <h3>Hi, I&apos;m Suhail Majeed</h3>
             <p>
-              I'm a passionate full-stack developer with expertise in Python, Java, and Shopify development, 
-              specializing in creating intelligent solutions through AI and automation. With a strong foundation 
-              in both frontend and backend technologies, I bring ideas to life through clean, efficient, and scalable code.
+              Most of my week is in the Shopify admin, the theme editor, and the codebase behind both.
+              I work with brands that have outgrown a template, need a careful migration, or hit a limit
+              where Liquid, the Storefront API, or a small app is the right answer—not another page builder
+              stacked on top.
             </p>
             <p>
-              My journey in technology began with a fascination for problem-solving and has evolved into a career 
-              focused on building innovative applications that make a real difference. I believe in continuous learning 
-              and staying at the forefront of technological advancements, especially in the rapidly evolving e-commerce 
-              and AI spaces.
+              I care about how the store feels on a phone, how checkout behaves under discounts and
+              shipping rules, and how editors actually maintain the site after launch. If you are hiring
+              for Shopify-only work, you are in the right place.
             </p>
-            
+
             <div className="about-features">
               {features.map((feature, index) => (
                 <motion.div
@@ -82,7 +80,7 @@ const About = () => {
                   }
                 }}
               >
-                View My Work
+                See recent builds
               </motion.button>
               <motion.button
                 className="btn btn-secondary"
@@ -95,7 +93,7 @@ const About = () => {
                   }
                 }}
               >
-                Get In Touch
+                Tell me about your store
               </motion.button>
             </motion.div>
           </motion.div>
@@ -115,13 +113,13 @@ const About = () => {
               >
                 <div className="card-header">
                   <FaCode className="card-icon" />
-                  <h4>Full-Stack Development</h4>
+                  <h4>Themes &amp; storefront</h4>
                 </div>
                 <div className="card-content">
-                  <p>End-to-end development from concept to deployment</p>
+                  <p>Dawn-based or fully custom OS 2.0, with sections merchants can reuse without breaking layout</p>
                   <div className="card-stats">
-                    <span>50+ Projects</span>
-                    <span>3+ Years</span>
+                    <span>PDP, PLP, cart</span>
+                    <span>Editor-friendly</span>
                   </div>
                 </div>
               </motion.div>
@@ -133,13 +131,13 @@ const About = () => {
               >
                 <div className="card-header">
                   <FaShopify className="card-icon" />
-                  <h4>Shopify Specialist</h4>
+                  <h4>Shopify platform</h4>
                 </div>
                 <div className="card-content">
-                  <p>Custom stores, apps, and e-commerce solutions</p>
+                  <p>Markets, B2B, bundles, subscriptions handoffs, and the boring data work that keeps orders moving</p>
                   <div className="card-stats">
-                    <span>20+ Stores</span>
-                    <span>95% Success</span>
+                    <span>Metafields</span>
+                    <span>Automation</span>
                   </div>
                 </div>
               </motion.div>
@@ -150,19 +148,18 @@ const About = () => {
                 transition={{ duration: 0.3 }}
               >
                 <div className="card-header">
-                  <FaRobot className="card-icon" />
-                  <h4>AI & Automation</h4>
+                  <FaPlug className="card-icon" />
+                  <h4>Apps &amp; integrations</h4>
                 </div>
                 <div className="card-content">
-                  <p>Intelligent solutions for business optimization</p>
+                  <p>Private apps, middleware, webhooks, and wiring Shopify to ERPs, 3PLs, and email without fragile hacks</p>
                   <div className="card-stats">
-                    <span>15+ Bots</span>
-                    <span>40% Efficiency</span>
+                    <span>GraphQL</span>
+                    <span>Webhooks</span>
                   </div>
                 </div>
               </motion.div>
             </div>
-
           </motion.div>
         </div>
       </div>

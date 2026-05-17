@@ -68,10 +68,14 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: FaGithub, href: '#', label: 'GitHub' },
-    { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-    { icon: FaTwitter, href: '#', label: 'Twitter' },
-    { icon: FaInstagram, href: '#', label: 'Instagram' }
+    { icon: FaGithub, href: 'https://github.com/suhail-zenic', label: 'GitHub' },
+    {
+      icon: FaLinkedin,
+      href: 'https://www.linkedin.com/in/suhail-majeed-449478369',
+      label: 'LinkedIn'
+    },
+    { icon: FaTwitter, href: 'https://x.com/suhailzenic', label: 'X' },
+    { icon: FaInstagram, href: 'https://www.instagram.com/suhailx777', label: 'Instagram' }
   ];
 
   const containerVariants = {
@@ -105,8 +109,8 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Get In Touch</h2>
-          <p className="section-subtitle">Let's discuss your next project</p>
+          <h2 className="section-title">Contact</h2>
+          <p className="section-subtitle">Shopify scopes, timelines, and whether you need a dev or a different partner</p>
         </motion.div>
 
         <div className="contact-content">
@@ -118,10 +122,11 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="contact-intro">
-              <h3>Let's Start a Conversation</h3>
+              <h3>Tell me about the store</h3>
               <p>
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                A myshopify.com link, your role, and what is on fire is enough for a first reply. If it is a bug, add
+                steps to reproduce and whether it happens on Dawn or a custom theme. I work across time zones but keep
+                response windows honest in the first email back.
               </p>
             </div>
 
@@ -158,12 +163,15 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h4>Follow Me</h4>
+              <h4>Elsewhere</h4>
               <div className="social-icons">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="social-link"
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
@@ -213,7 +221,7 @@ const Contact = () => {
                 <input
                   type="text"
                   name="subject"
-                  placeholder="Subject"
+                  placeholder="e.g. Migration from Woo, PDP metafields, checkout bug"
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
@@ -223,7 +231,7 @@ const Contact = () => {
               <div className="form-group">
                 <textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder="Store URL, Shopify plan, what you have tried, deadline if any"
                   rows="5"
                   value={formData.message}
                   onChange={handleInputChange}

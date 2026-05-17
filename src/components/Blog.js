@@ -6,85 +6,91 @@ const Blog = () => {
   const blogPosts = [
     {
       id: 1,
-      title: 'The Future of AI in Web Development',
-      excerpt: 'Exploring how artificial intelligence is reshaping the way we build and interact with web applications, from automated code generation to intelligent user experiences.',
-      content: 'Artificial intelligence is revolutionizing web development in unprecedented ways...',
-      category: 'AI & Automation',
-      author: 'Suhail Zenic',
-      date: 'Dec 15, 2024',
-      readTime: '5 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['AI', 'Web Development', 'Automation'],
+      title: 'When a metafield should be a metaobject',
+      excerpt:
+        'A quick rule of thumb for merchandising data that needs to be reused across PDP, PLP, and cart—and how to keep the editor experience sane.',
+      category: 'Platform',
+      author: 'Suhail Majeed',
+      date: 'Jan 8, 2026',
+      readTime: '6 min read',
+      coverTopic: 'Metafields',
+      accent: '#5c8f3e',
+      tags: ['Metafields', 'Metaobjects', 'Editor UX'],
       featured: true
     },
     {
       id: 2,
-      title: 'Building Scalable Python Applications',
-      excerpt: 'Best practices and patterns for creating maintainable and scalable Python applications that can handle growth and complexity.',
-      content: 'Python has become one of the most popular programming languages...',
-      category: 'Development',
-      author: 'Suhail Zenic',
-      date: 'Dec 10, 2024',
+      title: 'Cart.js is not a trash can',
+      excerpt:
+        'Why stacking third-party cart drawers breaks discounts, and how I sequence subscription apps, free gifts, and Shopify Functions without fighting the core cart.',
+      category: 'Themes',
+      author: 'Suhail Majeed',
+      date: 'Dec 18, 2025',
       readTime: '7 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['Python', 'Backend', 'Scalability'],
+      coverTopic: 'Cart',
+      accent: '#6366f1',
+      tags: ['Cart', 'Subscriptions', 'Apps'],
       featured: false
     },
     {
       id: 3,
-      title: 'Shopify Development Best Practices',
-      excerpt: 'Essential tips and techniques for building high-converting Shopify stores with custom themes, apps, and integrations.',
-      content: 'Shopify has become the go-to platform for e-commerce businesses...',
-      category: 'E-commerce',
-      author: 'Suhail Zenic',
-      date: 'Dec 5, 2024',
-      readTime: '6 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['Shopify', 'E-commerce', 'Liquid'],
+      title: '301 maps that survive migrations',
+      excerpt:
+        'What I export before DNS flips, how I test redirects with real query strings, and the Search Console checks I run the week after go-live.',
+      category: 'Ops',
+      author: 'Suhail Majeed',
+      date: 'Dec 2, 2025',
+      readTime: '8 min read',
+      coverTopic: 'Redirects',
+      accent: '#d97706',
+      tags: ['Migration', 'SEO', 'Redirects'],
       featured: true
     },
     {
       id: 4,
-      title: 'Modern Web Development Trends 2024',
-      excerpt: 'A comprehensive look at the latest trends shaping the future of web development, from new frameworks to emerging technologies.',
-      content: 'The web development landscape is constantly evolving...',
-      category: 'Technology',
-      author: 'Suhail Zenic',
-      date: 'Nov 28, 2024',
-      readTime: '8 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['Web Development', 'Trends', 'Technology'],
+      title: 'Webhook retries that do not double-charge',
+      excerpt:
+        'Idempotency keys, HMAC verification, and the boring logging that keeps Ops calm when Shopify replays `orders/updated` at 2 a.m.',
+      category: 'Apps',
+      author: 'Suhail Majeed',
+      date: 'Nov 20, 2025',
+      readTime: '9 min read',
+      coverTopic: 'Webhooks',
+      accent: '#0d9488',
+      tags: ['Webhooks', 'Node', 'Reliability'],
       featured: false
     },
     {
       id: 5,
-      title: 'Automation in E-commerce: A Complete Guide',
-      excerpt: 'How to leverage automation to streamline your e-commerce operations, from inventory management to customer service.',
-      content: 'E-commerce automation is no longer a luxury but a necessity...',
-      category: 'Automation',
-      author: 'Suhail Zenic',
-      date: 'Nov 20, 2024',
-      readTime: '9 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['Automation', 'E-commerce', 'Efficiency'],
+      title: 'Removing scripts without breaking pixels',
+      excerpt:
+        'A practical pass for legacy checkout scripts, consent banners, and tag managers—measured on hardware your customers actually use.',
+      category: 'Themes',
+      author: 'Suhail Majeed',
+      date: 'Nov 6, 2025',
+      readTime: '6 min read',
+      coverTopic: 'Performance',
+      accent: '#7c3aed',
+      tags: ['Performance', 'Pixels', 'Privacy'],
       featured: false
     },
     {
       id: 6,
-      title: 'Building Custom Shopify Apps',
-      excerpt: 'A step-by-step guide to creating custom Shopify apps that extend platform functionality and provide unique value to merchants.',
-      content: 'Shopify apps are powerful tools that can significantly enhance...',
-      category: 'Shopify',
-      author: 'Suhail Zenic',
-      date: 'Nov 15, 2024',
+      title: 'B2B catalogs: what to lock first',
+      excerpt:
+        'Company locations vs. tags, how price lists interact with retail promos, and the small Liquid guards that stop wholesale buyers seeing consumer-only merch.',
+      category: 'Platform',
+      author: 'Suhail Majeed',
+      date: 'Oct 22, 2025',
       readTime: '10 min read',
-      image: '/api/placeholder/400/250',
-      tags: ['Shopify', 'Apps', 'Development'],
+      coverTopic: 'B2B',
+      accent: '#2563eb',
+      tags: ['B2B', 'Plus', 'Liquid'],
       featured: true
     }
   ];
 
-  const categories = ['All', 'AI & Automation', 'Development', 'E-commerce', 'Technology', 'Automation', 'Shopify'];
+  const categories = ['All', 'Themes', 'Platform', 'Apps', 'Ops'];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,8 +123,8 @@ const Blog = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Latest Insights</h2>
-          <p className="section-subtitle">Thoughts on technology, development, and industry trends</p>
+          <h2 className="section-title">Shopify notes</h2>
+          <p className="section-subtitle">Short writeups I send to clients—published here when they age out of the inbox</p>
         </motion.div>
 
         <motion.div
@@ -131,6 +137,7 @@ const Blog = () => {
           {categories.map((category) => (
             <motion.button
               key={category}
+              type="button"
               className="category-btn"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -148,7 +155,7 @@ const Blog = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {blogPosts.map((post, index) => (
+          {blogPosts.map((post) => (
             <motion.article
               key={post.id}
               className={`blog-card ${post.featured ? 'featured' : ''}`}
@@ -156,15 +163,13 @@ const Blog = () => {
               whileHover={{ y: -10, scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="blog-image">
-                <div className="blog-category-badge">
-                  {post.category}
+              <div className="blog-image" style={{ '--note-accent': post.accent }}>
+                <div className="blog-cover" aria-hidden>
+                  <span className="blog-cover-num">{String(post.id).padStart(2, '0')}</span>
+                  <span className="blog-cover-topic">{post.coverTopic}</span>
                 </div>
-                {post.featured && (
-                  <div className="featured-badge">
-                    Featured
-                  </div>
-                )}
+                <div className="blog-category-badge">{post.category}</div>
+                {post.featured && <div className="featured-badge">Featured</div>}
               </div>
 
               <div className="blog-content">
@@ -193,12 +198,8 @@ const Blog = () => {
                   ))}
                 </div>
 
-                <motion.button
-                  className="blog-read-more"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  Read More
+                <motion.button type="button" className="blog-read-more" whileTap={{ scale: 0.98 }}>
+                  Read draft
                   <FaArrowRight />
                 </motion.button>
               </div>
@@ -214,14 +215,16 @@ const Blog = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="cta-content">
-            <h3>Stay Updated with Latest Insights</h3>
-            <p>Follow my blog for the latest trends in web development, AI, and e-commerce.</p>
+            <h3>Want these as a newsletter?</h3>
+            <p>Not running one yet—if enough people ask, I will ship a monthly Shopify-only digest.</p>
             <motion.button
+              type="button"
               className="btn btn-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              View All Posts
+              Ping me about it
             </motion.button>
           </div>
         </motion.div>
