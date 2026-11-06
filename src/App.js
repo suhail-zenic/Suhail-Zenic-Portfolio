@@ -9,7 +9,7 @@ import Skills from './components/Skills';
 import Portfolio from './components/Portfolio';
 import Services from './components/Services';
 import Process from './components/Process';
-import Testimonials from './components/Testimonials';
+import Reviews from './components/Reviews';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -41,7 +41,7 @@ function App() {
         <Portfolio />
         <Services />
         <Process />
-        <Testimonials />
+        <Reviews />
         <Blog />
         <Contact />
       </main>

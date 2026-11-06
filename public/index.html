@@ -122,6 +122,17 @@
         <p>Email <a href="mailto:suhail.codes99@gmail.com">suhail.codes99@gmail.com</a> or call <a href="tel:+917736132338">+91 77361 32338</a>.</p>
       </main>
     </noscript>
+    <!-- Static copy of the review form so Netlify Forms detects it at deploy time -->
+    <form name="review" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="role" />
+      <input type="text" name="store" />
+      <input type="text" name="rating" />
+      <textarea name="review"></textarea>
+      <input type="text" name="consent" />
+      <input type="text" name="bot-field" />
+    </form>
     <div id="root"></div>
   </body>
 </html>
