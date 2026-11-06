@@ -13,7 +13,7 @@ const screenshotSources = (url) => {
   ];
 };
 
-const hostLabel = (url) => {
+export const hostLabel = (url) => {
   try {
     return new URL(url).hostname.replace(/^www\./, '');
   } catch {
@@ -99,7 +99,7 @@ const StorePreview = ({ url, accent, name, priority }) => {
   );
 };
 
-const STORES = [
+export const STORES = [
   {
     id: 'taruni',
     name: 'Taruni',

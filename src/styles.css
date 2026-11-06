@@ -1579,165 +1579,162 @@ html.dark .service__list svg {
   font-size: 0.98rem;
 }
 
-/* ---------- Testimonials ---------- */
+/* ---------- Clients ---------- */
 .section--ink .section-title {
   color: #f2eee3;
 }
-.quotes {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 24px;
+.section--ink .section-lede {
+  color: rgba(242, 238, 227, 0.7);
 }
-.quote {
+.brands {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.brands > li {
+  display: flex;
+}
+.brand {
   position: relative;
-  padding: clamp(32px, 5vw, 56px);
-  border-radius: var(--radius);
-  background: rgba(242, 238, 227, 0.06);
-  border: 1px solid rgba(242, 238, 227, 0.12);
-  min-height: 420px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 24px;
+  min-height: 190px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(242, 238, 227, 0.14);
+  background: rgba(242, 238, 227, 0.04);
+  color: #f2eee3;
+  text-align: left;
   overflow: hidden;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.quote__mark {
+.brand::after {
+  content: '';
   position: absolute;
-  top: -40px;
-  right: 24px;
-  font-family: var(--font-serif);
-  font-size: 16rem;
-  line-height: 1;
-  color: var(--lime);
-  opacity: 0.18;
+  inset: auto -30% -60% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent, var(--lime)), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
   pointer-events: none;
 }
-.stars {
-  display: flex;
-  gap: 4px;
-  color: var(--sun);
-  margin-bottom: 20px;
+.brand:hover {
+  transform: translateY(-4px);
+  border-color: rgba(242, 238, 227, 0.35);
+  background: rgba(242, 238, 227, 0.08);
 }
-.quote blockquote {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+.brand:hover::after {
+  opacity: 0.35;
 }
-.quote figcaption {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 32px;
+.brand__mono {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  margin-bottom: auto;
+  background: var(--accent, var(--lime));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
 }
-.quote figcaption strong {
-  display: block;
+.brand__name {
+  margin-top: 28px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
-.quote figcaption small {
-  opacity: 0.7;
+.brand__meta {
+  opacity: 0.6;
+  overflow-wrap: anywhere;
 }
-.quote__project {
-  margin-left: auto;
-  padding: 6px 12px;
-  border-radius: 999px;
+.brand__arrow {
+  position: absolute;
+  top: 24px;
+  right: 22px;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  transition: transform 0.3s var(--ease), opacity 0.3s, color 0.3s;
+}
+.brand:hover .brand__arrow {
+  opacity: 1;
+  color: var(--lime);
+  transform: translate(3px, -3px);
+}
+.brand--next {
+  border-style: dashed;
+  border-color: rgba(200, 241, 105, 0.45);
+}
+.brand--next .brand__mono {
   background: var(--lime);
   color: var(--lime-ink);
+  font-size: 1.3rem;
 }
-.quote__controls {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 32px;
+.brand--next .brand__name {
+  color: var(--lime);
 }
-.quote__count {
-  opacity: 0.7;
+.brand--next:hover {
+  border-color: var(--lime);
 }
 
-.avatar {
-  width: 54px;
-  height: 54px;
+.client-quotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+.client-quote {
+  padding: 28px;
+  border-radius: var(--radius);
+  background: rgba(242, 238, 227, 0.06);
+  border: 1px solid rgba(242, 238, 227, 0.14);
+}
+.client-quote blockquote {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  line-height: 1.35;
+}
+.client-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.client-quote figcaption strong {
+  display: block;
+}
+.client-quote figcaption small {
+  opacity: 0.7;
+}
+.client-quote figcaption a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.client-quote__avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-weight: 700;
-  color: #16150f;
   background: var(--lime);
+  color: var(--lime-ink);
+  font-weight: 700;
   flex-shrink: 0;
 }
-.avatar--sm {
-  width: 42px;
-  height: 42px;
-  font-size: 0.9rem;
-}
-.avatar--coral {
-  background: var(--coral);
-  color: #fff;
-}
-.avatar--sky {
-  background: var(--sky);
-}
-.avatar--sun {
-  background: var(--sun);
-}
 
-.quote-list {
-  display: grid;
-  gap: 10px;
-  align-content: start;
+.brands__note {
+  margin-top: 32px;
+  color: rgba(242, 238, 227, 0.75);
 }
-.quote-list__item {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(242, 238, 227, 0.12);
-  text-align: left;
+.brands__note .link-btn {
   color: #f2eee3;
-  overflow: hidden;
-  opacity: 0.6;
-  transition: all 0.25s var(--ease);
-}
-.quote-list__item:hover {
-  opacity: 1;
-}
-.quote-list__item.is-active {
-  opacity: 1;
-  background: rgba(242, 238, 227, 0.08);
-  border-color: rgba(242, 238, 227, 0.3);
-}
-.quote-list__item strong {
-  display: block;
-  line-height: 1.2;
-}
-.quote-list__item small {
-  opacity: 0.65;
-  font-size: 0.85rem;
-}
-.quote-list__progress {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 100%;
-  background: var(--lime);
-  transform-origin: left;
-  animation: progress 7s linear forwards;
-}
-@keyframes progress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-.quotes__note {
-  margin-top: 28px;
-  opacity: 0.65;
-  font-size: 0.95rem;
 }
 
 /* ---------- Notes ---------- */
@@ -2116,10 +2113,7 @@ html.dark .service__list svg {
     display: none;
   }
 
-  .quotes {
-    grid-template-columns: 1fr;
-  }
-  .quote-list {
+  .brands {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2194,8 +2188,7 @@ html.dark .service__list svg {
 
   .work-grid,
   .services,
-  .steps,
-  .quote-list {
+  .steps {
     grid-template-columns: 1fr;
   }
   .work--wide .browser__view {
@@ -2205,11 +2198,44 @@ html.dark .service__list svg {
     font-size: 1.35rem;
   }
 
-  .quote {
-    min-height: 0;
+  .brands {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
-  .quote__project {
-    margin-left: 0;
+  .brand {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    row-gap: 2px;
+    align-items: center;
+    min-height: 0;
+    padding: 14px 44px 14px 14px;
+  }
+  .brand__mono {
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+  .brand__name {
+    margin: 0;
+    font-size: 1.1rem;
+    align-self: end;
+  }
+  .brand__meta {
+    align-self: start;
+    overflow-wrap: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .brand__host {
+    display: none;
+  }
+  .brand__arrow {
+    top: 50%;
+    right: 16px;
+    margin-top: -0.65rem;
   }
 
   .note {
