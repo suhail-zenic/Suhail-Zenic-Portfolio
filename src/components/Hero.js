@@ -38,7 +38,7 @@ const Hero = () => {
       <div className="container hero__grid">
         <div className="hero__copy">
           <motion.span className="pill pill--status" {...fade(0)}>
-            <span className="pulse-dot" /> Available for new Shopify projects
+            <span className="pulse-dot" /> Freelance Shopify developer<span className="pill__extra"> · Available for projects</span>
           </motion.span>
 
           <motion.h1 className="hero__title" {...fade(0.08)}>

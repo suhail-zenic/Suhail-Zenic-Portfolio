@@ -18,8 +18,8 @@ const Footer = () => (
     <div className="container">
       <div className="footer__top">
         <p className="footer__pitch">
-          Independent Shopify developer building themes, custom apps, migrations and integrations for merchants and
-          agencies worldwide.
+          Suhail Majeed is a freelance Shopify developer and Shopify expert from India, building custom themes, apps,
+          migrations and integrations for merchants and agencies worldwide.
         </p>
         <nav className="footer__links" aria-label="Footer">
           {LINKS.map((l) => (

@@ -425,6 +425,11 @@ html.dark .section-title .serif-accent {
   font-weight: 500;
   box-shadow: var(--shadow);
 }
+@media (max-width: 480px) {
+  .pill__extra {
+    display: none;
+  }
+}
 .pulse-dot {
   width: 9px;
   height: 9px;
