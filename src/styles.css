@@ -1837,10 +1837,16 @@ html.dark .service__list svg {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-wrap: wrap;
   font-size: 1.05rem;
+  line-height: 1.35;
+}
+.contact__lines li > a,
+.contact__lines li > span {
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 .contact__lines li > svg {
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   padding: 11px;
@@ -2214,6 +2220,16 @@ html.dark .service__list svg {
   }
   .contact__panel {
     border-radius: 24px;
+  }
+  .contact__lines li {
+    font-size: 1rem;
+  }
+  .mini-btn {
+    flex-shrink: 0;
+    padding: 8px;
+  }
+  .mini-btn span {
+    display: none;
   }
 }
 

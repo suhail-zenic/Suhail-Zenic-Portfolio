@@ -89,7 +89,10 @@ const Contact = () => {
             <ul className="contact__lines">
               <li>
                 <FiMail aria-hidden />
-                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <a href={`mailto:${EMAIL}`}>
+                  {EMAIL.split('@')[0]}
+                  <wbr />@{EMAIL.split('@')[1]}
+                </a>
                 <button type="button" className="mini-btn" onClick={copyEmail} aria-label="Copy email address">
                   {copied ? <FiCheck /> : <FiCopy />}
                   <span>{copied ? 'Copied' : 'Copy'}</span>
