@@ -21,7 +21,7 @@ export const SOCIALS = [
   { icon: FaGithub, href: 'https://github.com/suhail-zenic', label: 'GitHub' },
   { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/suhail-majeed-449478369', label: 'LinkedIn' },
   { icon: FaXTwitter, href: 'https://x.com/suhailzenic', label: 'X' },
-  { icon: FaInstagram, href: 'https://www.instagram.com/suhailx777', label: 'Instagram' }
+  { icon: FaInstagram, href: 'https://www.instagram.com/just_suhaail', label: 'Instagram' }
 ];
 
 const Contact = () => {
