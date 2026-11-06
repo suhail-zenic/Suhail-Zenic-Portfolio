@@ -1,47 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowUp } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { FiArrowUp } from 'react-icons/fi';
 
 const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    const onScroll = () => setVisible(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.button
-          className="scroll-to-top-btn"
-          onClick={scrollToTop}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          whileHover={{ scale: 1.1, y: -5 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.2 }}
-        >
-          <FaArrowUp />
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <>
+      <motion.div className="progress-bar" style={{ scaleX }} aria-hidden />
+      <AnimatePresence>
+        {visible && (
+          <motion.button
+            type="button"
+            className="to-top"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            aria-label="Back to top"
+          >
+            <FiArrowUp />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

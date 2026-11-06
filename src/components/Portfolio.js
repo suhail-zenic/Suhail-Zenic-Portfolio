@@ -1,13 +1,15 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaExternalLinkAlt, FaShopify } from 'react-icons/fa';
+import { FiArrowUpRight, FiLock } from 'react-icons/fi';
+import { FaShopify } from 'react-icons/fa';
+import { SectionHeader, reveal, startProject } from './utils';
 
 /** Smaller shots = quicker first paint; mshots first (usually cached well), thum as backup. */
 const screenshotSources = (url) => {
   const enc = encodeURIComponent(url);
   return [
-    `https://s0.wp.com/mshots/v1/${enc}?w=560`,
-    `https://image.thum.io/get/width/560/crop/420/noanimate/${enc}`
+    `https://s0.wp.com/mshots/v1/${enc}?w=800`,
+    `https://image.thum.io/get/width/800/crop/600/noanimate/${enc}`
   ];
 };
 
@@ -19,27 +21,22 @@ const hostLabel = (url) => {
   }
 };
 
-const storeMonogram = (name) => {
-  const letters = name.replace(/[^\p{L}\p{N}]/gu, '');
-  return letters.slice(0, 2).toUpperCase() || '—';
-};
+const monogram = (name) => name.replace(/[^\p{L}\p{N}]/gu, '').slice(0, 2).toUpperCase() || '—';
 
-const plateGradient = (hex) =>
-  `linear-gradient(168deg, ${hex}55 0%, #0a0f1a 42%, #020617 100%)`;
+const plate = (hex) => `linear-gradient(160deg, ${hex} 0%, ${hex}cc 55%, #16150f 100%)`;
 
 const StorePreview = ({ url, accent, name, priority }) => {
   const rootRef = useRef(null);
   const imgRef = useRef(null);
-  const prevUrlRef = useRef(null);
   const sources = useMemo(() => screenshotSources(url), [url]);
   const [sourceIndex, setSourceIndex] = useState(0);
   const [shouldLoad, setShouldLoad] = useState(priority);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (priority || shouldLoad) return;
+    if (priority || shouldLoad) return undefined;
     const node = rootRef.current;
-    if (!node) return;
+    if (!node) return undefined;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,65 +44,46 @@ const StorePreview = ({ url, accent, name, priority }) => {
           io.disconnect();
         }
       },
-      { rootMargin: '180px 0px', threshold: 0 }
+      { rootMargin: '200px 0px' }
     );
     io.observe(node);
     return () => io.disconnect();
   }, [priority, shouldLoad]);
 
-  useEffect(() => {
-    if (prevUrlRef.current !== null && prevUrlRef.current !== url) {
-      setSourceIndex(0);
-      setLoaded(false);
-    }
-    prevUrlRef.current = url;
-  }, [url]);
-
   useLayoutEffect(() => {
-    if (!shouldLoad || sourceIndex >= sources.length) return;
     const el = imgRef.current;
-    if (el && el.complete && el.naturalWidth > 0) {
-      setLoaded(true);
-    }
-  }, [shouldLoad, sourceIndex, sources.length, url]);
-
-  const monogram = storeMonogram(name);
+    if (shouldLoad && el && el.complete && el.naturalWidth > 0) setLoaded(true);
+  }, [shouldLoad, sourceIndex]);
 
   if (sourceIndex >= sources.length) {
     return (
-      <div className="store-card-preview-root" ref={rootRef}>
-        <div className="store-card-preview-fallback" style={{ background: plateGradient(accent) }} aria-hidden>
-          <FaShopify />
-          <span>{hostLabel(url)}</span>
+      <div className="shot" ref={rootRef}>
+        <div className="shot__plate" style={{ background: plate(accent) }} aria-hidden>
+          <FaShopify className="shot__fallback-icon" />
+          <span className="shot__mono">{monogram(name)}</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="store-card-preview-root" ref={rootRef}>
-      <div
-        className={`store-card-preview-plate ${loaded ? 'store-card-preview-plate--hide' : ''}`}
-        style={{ background: plateGradient(accent) }}
-        aria-hidden
-      >
-        <span className="store-card-preview-mono">{monogram}</span>
+    <div className="shot" ref={rootRef}>
+      <div className={`shot__plate ${loaded ? 'shot__plate--hide' : ''}`} style={{ background: plate(accent) }} aria-hidden>
+        <span className="shot__mono">{monogram(name)}</span>
       </div>
       {shouldLoad && (
         <img
           ref={imgRef}
           key={`${url}-${sourceIndex}`}
           src={sources[sourceIndex]}
-          alt=""
+          alt={`Homepage of ${name}`}
           loading={priority ? 'eager' : 'lazy'}
-          fetchPriority={priority ? 'high' : 'low'}
           decoding="async"
-          width={560}
-          height={354}
-          className={`store-card-preview-img ${loaded ? 'store-card-preview-img--show' : ''}`}
+          width={800}
+          height={600}
+          className={`shot__img ${loaded ? 'shot__img--show' : ''}`}
           onLoad={(e) => {
             if (e.currentTarget.naturalWidth === 0) {
-              setLoaded(false);
               setSourceIndex((i) => i + 1);
               return;
             }
@@ -117,7 +95,6 @@ const StorePreview = ({ url, accent, name, priority }) => {
           }}
         />
       )}
-      <span className="store-card-preview-veil" aria-hidden />
     </div>
   );
 };
@@ -129,7 +106,7 @@ const STORES = [
     url: 'https://www.taruni.in/',
     category: 'clothing',
     categoryLabel: 'Clothing',
-    blurb: 'Ethnic wear—collections and checkout tuned for phones.',
+    blurb: 'Ethnic wear. Collections and checkout tuned for phones.',
     accent: '#7c3aed'
   },
   {
@@ -138,7 +115,7 @@ const STORES = [
     url: 'https://www.malikaclothing.qa/',
     category: 'clothing',
     categoryLabel: 'Clothing',
-    blurb: 'Qatar store—catalog, Arabic/English paths, payments tidy.',
+    blurb: 'Qatar store with Arabic/English paths and tidy payments.',
     accent: '#0d9488'
   },
   {
@@ -147,7 +124,7 @@ const STORES = [
     url: 'https://www.naaribyardraknair.com/',
     category: 'clothing',
     categoryLabel: 'Clothing',
-    blurb: 'Fashion brand—homepage story, collections, PDP cleanup.',
+    blurb: 'Fashion brand: homepage story, collections and PDP cleanup.',
     accent: '#c2410c'
   },
   {
@@ -156,7 +133,7 @@ const STORES = [
     url: 'https://www.flyhoch.com/',
     category: 'clothing',
     categoryLabel: 'Clothing',
-    blurb: 'Apparel—flexible sections so the team can swap promos without dev.',
+    blurb: 'Apparel with flexible sections so the team can swap promos without a dev.',
     accent: '#2563eb'
   },
   {
@@ -164,8 +141,8 @@ const STORES = [
     name: 'GOCS',
     url: 'https://gocs.shop/',
     category: 'food',
-    categoryLabel: 'Food & beverages',
-    blurb: 'Food ordering—menus, cart, and fulfillment-friendly SKUs.',
+    categoryLabel: 'Food & drink',
+    blurb: 'Food ordering: menus, cart and fulfillment-friendly SKUs.',
     accent: '#ca8a04'
   },
   {
@@ -173,8 +150,8 @@ const STORES = [
     name: 'Domnom',
     url: 'https://www.domnom.in/',
     category: 'food',
-    categoryLabel: 'Food & beverages',
-    blurb: 'Domnom—quick path from landing to checkout on mobile.',
+    categoryLabel: 'Food & drink',
+    blurb: 'A quick path from landing page to checkout on mobile.',
     accent: '#dc2626'
   },
   {
@@ -182,8 +159,8 @@ const STORES = [
     name: 'Sreeyang',
     url: 'https://www.sreeyang.com/',
     category: 'home',
-    categoryLabel: 'Curtains & home decor',
-    blurb: 'Curtains & decor—room-led browsing and clear size options.',
+    categoryLabel: 'Home decor',
+    blurb: 'Curtains & decor with room-led browsing and clear size options.',
     accent: '#4f46e5'
   }
 ];
@@ -191,149 +168,98 @@ const STORES = [
 const FILTERS = [
   { key: 'all', label: 'All stores' },
   { key: 'clothing', label: 'Clothing' },
-  { key: 'food', label: 'Food & beverages' },
-  { key: 'home', label: 'Curtains & home' }
+  { key: 'food', label: 'Food & drink' },
+  { key: 'home', label: 'Home decor' }
 ];
 
 const Portfolio = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const filtered = useMemo(
-    () => (activeFilter === 'all' ? STORES : STORES.filter((s) => s.category === activeFilter)),
-    [activeFilter]
-  );
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.34, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.98,
-      transition: { duration: 0.18 }
-    }
-  };
+  const [filter, setFilter] = useState('all');
+  const list = useMemo(() => (filter === 'all' ? STORES : STORES.filter((s) => s.category === filter)), [filter]);
 
   return (
-    <section id="portfolio" className="portfolio section">
+    <section id="portfolio" className="section">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Live Shopify stores</h2>
-          <p className="section-subtitle">
-            Real sites, live links. Thumbnails are auto-grabs—tap through if you want the full experience.
-          </p>
-        </motion.div>
+        <div className="section-head-row">
+          <SectionHeader eyebrow="Selected work" title="Live stores," accent="real customers">
+            Every one of these is open for business right now. Click through and try them on your phone.
+          </SectionHeader>
 
-        <motion.div
-          className="portfolio-filters"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          {FILTERS.map((filter) => (
-            <motion.button
-              key={filter.key}
-              type="button"
-              className={`filter-btn ${activeFilter === filter.key ? 'active' : ''}`}
-              onClick={() => setActiveFilter(filter.key)}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {filter.label}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="portfolio-grid store-grid"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35 }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((store, idx) => (
-              <motion.article
-                key={store.id}
-                layout
-                className="portfolio-item store-card"
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                whileHover={{ y: -4 }}
-                transition={{ type: 'tween', duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{ '--store-accent': store.accent }}
+          <div className="chips" role="group" aria-label="Filter stores">
+            {FILTERS.map((f) => (
+              <button
+                key={f.key}
+                type="button"
+                className={`chip ${filter === f.key ? 'is-active' : ''}`}
+                aria-pressed={filter === f.key}
+                onClick={() => setFilter(f.key)}
               >
-                <a
-                  href={store.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="store-card-media"
-                  aria-label={`Open ${store.name} in a new tab`}
-                >
-                  <StorePreview
-                    url={store.url}
-                    accent={store.accent}
-                    name={store.name}
-                    priority={idx < 3}
-                  />
-                  <span className="store-card-category">{store.categoryLabel}</span>
-                  <span className="store-card-open">
-                    <FaExternalLinkAlt aria-hidden />
-                    Open site
-                  </span>
-                </a>
+                {f.label}
+                <span className="chip__count">
+                  {f.key === 'all' ? STORES.length : STORES.filter((s) => s.category === f.key).length}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
 
-                <div className="store-card-body">
-                  <h3 className="store-card-title">{store.name}</h3>
-                  <p className="store-card-host">{hostLabel(store.url)}</p>
-                  <p className="store-card-blurb">{store.blurb}</p>
-                  <a
-                    href={store.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="store-card-cta"
-                  >
-                    Visit live store
-                    <FaExternalLinkAlt aria-hidden />
-                  </a>
+        <motion.div className="work-grid" layout>
+          <AnimatePresence mode="popLayout">
+            {list.map((store, idx) => (
+              <motion.a
+                layout
+                key={store.id}
+                href={store.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`work ${idx === 0 && filter === 'all' ? 'work--wide' : ''}`}
+                style={{ '--accent': store.accent }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="browser">
+                  <div className="browser__bar">
+                    <span className="browser__dots" aria-hidden>
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    <span className="browser__url">
+                      <FiLock aria-hidden /> {hostLabel(store.url)}
+                    </span>
+                  </div>
+                  <div className="browser__view">
+                    <StorePreview url={store.url} accent={store.accent} name={store.name} priority={idx < 3} />
+                  </div>
                 </div>
-              </motion.article>
+
+                <div className="work__meta">
+                  <div>
+                    <span className="work__cat">{store.categoryLabel}</span>
+                    <h3 className="work__title">{store.name}</h3>
+                    <p className="work__blurb">{store.blurb}</p>
+                  </div>
+                  <span className="work__arrow" aria-hidden>
+                    <FiArrowUpRight />
+                  </span>
+                </div>
+                <span className="sr-only">(opens in a new tab)</span>
+              </motion.a>
             ))}
           </AnimatePresence>
         </motion.div>
 
-        <motion.div
-          className="portfolio-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
-          <div className="cta-content">
-            <h3>Want your store here?</h3>
-            <p>Tell me what is broken or missing and when you need it—I will say if I can take it on.</p>
-            <motion.button
-              type="button"
-              className="btn btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Start a conversation
-            </motion.button>
+        <motion.div className="banner" {...reveal}>
+          <div>
+            <h3>
+              Want your store <em className="serif-accent">here</em> next?
+            </h3>
+            <p>Tell me what is broken or missing and when you need it. I&apos;ll tell you honestly if I&apos;m the right fit.</p>
           </div>
+          <button type="button" className="btn btn--accent btn--lg" onClick={() => startProject()}>
+            Start a conversation <FiArrowUpRight />
+          </button>
         </motion.div>
       </div>
     </section>

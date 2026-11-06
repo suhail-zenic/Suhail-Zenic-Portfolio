@@ -1,170 +1,141 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaCheckCircle, FaCode, FaShopify, FaPlug } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
+import { FiCheck, FiLayout, FiDatabase, FiZap } from 'react-icons/fi';
+import { SectionHeader, reveal, startProject } from './utils';
 
-const About = () => {
-  const features = [
-    'Online Store 2.0 themes and section architecture',
-    'Custom and private Shopify apps when off-the-shelf is not enough',
-    'Metafields, metaobjects, and clean content models',
-    'Migrations, 3PL, subscriptions, and the messy middle',
-    'Performance: real Core Web Vitals work, not checkbox SEO'
-  ];
+const Counter = ({ to, suffix = '' }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  const [val, setVal] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return undefined;
+    const controls = animate(0, to, {
+      duration: 1.6,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setVal(Math.round(v))
+    });
+    return () => controls.stop();
+  }, [inView, to]);
 
   return (
-    <section id="about" className="about section">
-      <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">About</h2>
-          <p className="section-subtitle">Shopify is the product; I ship the parts merchants touch</p>
-        </motion.div>
-
-        <div className="about-content">
-          <motion.div
-            className="about-text"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3>Hi, I&apos;m Suhail Majeed</h3>
-            <p>
-              Most of my week is in the Shopify admin, the theme editor, and the codebase behind both.
-              I work with brands that have outgrown a template, need a careful migration, or hit a limit
-              where Liquid, the Storefront API, or a small app is the right answer—not another page builder
-              stacked on top.
-            </p>
-            <p>
-              I care about how the store feels on a phone, how checkout behaves under discounts and
-              shipping rules, and how editors actually maintain the site after launch. If you are hiring
-              for Shopify-only work, you are in the right place.
-            </p>
-
-            <div className="about-features">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={feature}
-                  className="feature-item"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <FaCheckCircle className="feature-icon" />
-                  <span>{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              className="about-buttons"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-            >
-              <motion.button
-                className="btn btn-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const element = document.querySelector('#portfolio');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                See recent builds
-              </motion.button>
-              <motion.button
-                className="btn btn-secondary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const element = document.querySelector('#contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Tell me about your store
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="about-visual"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="about-cards">
-              <motion.div
-                className="about-card primary"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="card-header">
-                  <FaCode className="card-icon" />
-                  <h4>Themes &amp; storefront</h4>
-                </div>
-                <div className="card-content">
-                  <p>Dawn-based or fully custom OS 2.0, with sections merchants can reuse without breaking layout</p>
-                  <div className="card-stats">
-                    <span>PDP, PLP, cart</span>
-                    <span>Editor-friendly</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="about-card secondary"
-                whileHover={{ scale: 1.05, rotate: -2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="card-header">
-                  <FaShopify className="card-icon" />
-                  <h4>Shopify platform</h4>
-                </div>
-                <div className="card-content">
-                  <p>Markets, B2B, bundles, subscriptions handoffs, and the boring data work that keeps orders moving</p>
-                  <div className="card-stats">
-                    <span>Metafields</span>
-                    <span>Automation</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="about-card accent"
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="card-header">
-                  <FaPlug className="card-icon" />
-                  <h4>Apps &amp; integrations</h4>
-                </div>
-                <div className="card-content">
-                  <p>Private apps, middleware, webhooks, and wiring Shopify to ERPs, 3PLs, and email without fragile hacks</p>
-                  <div className="card-stats">
-                    <span>GraphQL</span>
-                    <span>Webhooks</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+    <span ref={ref}>
+      {val}
+      {suffix}
+    </span>
   );
 };
+
+const STATS = [
+  { to: 28, suffix: '+', label: 'Shopify launches & relaunches' },
+  { to: 40, suffix: '+', label: 'Theme & checkout tickets shipped' },
+  { to: 18, suffix: '+', label: 'Merchants & partners, direct' },
+  { to: 4, suffix: '+', label: 'Years focused only on Shopify' }
+];
+
+const CARES = [
+  'Online Store 2.0 themes & section architecture',
+  'Custom apps when off-the-shelf is not enough',
+  'Metafields, metaobjects & clean content models',
+  'Migrations, 3PL, subscriptions & the messy middle',
+  'Real Core Web Vitals work, not checkbox SEO'
+];
+
+const FOCUS = [
+  {
+    icon: FiLayout,
+    title: 'Themes & storefront',
+    text: 'Dawn-based or fully custom OS 2.0, with sections your team can reuse without breaking layout.',
+    tags: ['PDP / PLP / cart', 'Editor-friendly']
+  },
+  {
+    icon: FiDatabase,
+    title: 'Shopify platform',
+    text: 'Markets, B2B, bundles, subscriptions and the quiet data work that keeps orders moving.',
+    tags: ['Metafields', 'Automation']
+  },
+  {
+    icon: FiZap,
+    title: 'Apps & integrations',
+    text: 'Private apps, webhooks and middleware that wire Shopify to ERPs, 3PLs and email without fragile hacks.',
+    tags: ['GraphQL', 'Webhooks']
+  }
+];
+
+const About = () => (
+  <section id="about" className="section">
+    <div className="container">
+      <SectionHeader eyebrow="About me" title="Shopify is the product." accent="I ship the parts merchants touch." />
+
+      <div className="bento">
+        <motion.article className="card bento__intro" {...reveal}>
+          <div className="avatar-badge" aria-hidden>
+            SM
+          </div>
+          <h3>Hi, I&apos;m Suhail 👋</h3>
+          <p>
+            Most of my week is spent in the Shopify admin, the theme editor and the code behind both. I work
+            with brands that have outgrown a template, need a careful migration, or hit a limit where Liquid,
+            the Storefront API or a small app is the right answer, not another page builder stacked on top.
+          </p>
+          <p>
+            I care about how your store feels on a phone, how checkout behaves under discounts and shipping
+            rules, and how easy it is for your team to keep things tidy after launch.
+          </p>
+          <button type="button" className="btn btn--ink" onClick={() => startProject()}>
+            Tell me about your store
+          </button>
+        </motion.article>
+
+        <motion.div className="bento__stats" {...reveal} transition={{ ...reveal.transition, delay: 0.1 }}>
+          {STATS.map((s) => (
+            <div key={s.label} className="card stat">
+              <span className="stat__num">
+                <Counter to={s.to} suffix={s.suffix} />
+              </span>
+              <span className="stat__label">{s.label}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.article className="card card--forest bento__cares" {...reveal} transition={{ ...reveal.transition, delay: 0.15 }}>
+          <span className="eyebrow eyebrow--light">What I obsess over</span>
+          <ul className="checklist">
+            {CARES.map((c) => (
+              <li key={c}>
+                <span className="checklist__tick">
+                  <FiCheck />
+                </span>
+                {c}
+              </li>
+            ))}
+          </ul>
+        </motion.article>
+
+        {FOCUS.map((f, i) => (
+          <motion.article
+            key={f.title}
+            className="card focus"
+            {...reveal}
+            transition={{ ...reveal.transition, delay: 0.1 + i * 0.08 }}
+          >
+            <span className="focus__icon">
+              <f.icon />
+            </span>
+            <h4>{f.title}</h4>
+            <p>{f.text}</p>
+            <div className="tags">
+              {f.tags.map((t) => (
+                <span key={t} className="tag">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default About;

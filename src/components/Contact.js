@@ -1,280 +1,192 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FaEnvelope, 
-  FaPhone, 
-  FaMapMarkerAlt, 
-  FaGithub, 
-  FaLinkedin, 
-  FaTwitter, 
-  FaInstagram,
-  FaPaperPlane,
-  FaCheckCircle,
-  FaExclamationCircle
-} from 'react-icons/fa';
+import { FiMail, FiPhone, FiGlobe, FiSend, FiCheck, FiCopy } from 'react-icons/fi';
+import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from 'react-icons/fa6';
+import { reveal } from './utils';
+
+const EMAIL = 'suhail.codes99@gmail.com';
+const PHONE = '+917736132338';
+
+const BASE_TOPICS = [
+  'Themes & storefront UX',
+  'Migrations & replatforming',
+  'Custom & private apps',
+  'Ops integrations',
+  'Speed & measurement',
+  'Retainers & partner support',
+  'Something else'
+];
+
+export const SOCIALS = [
+  { icon: FaGithub, href: 'https://github.com/suhail-zenic', label: 'GitHub' },
+  { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/suhail-majeed-449478369', label: 'LinkedIn' },
+  { icon: FaXTwitter, href: 'https://x.com/suhailzenic', label: 'X' },
+  { icon: FaInstagram, href: 'https://www.instagram.com/suhailx777', label: 'Instagram' }
+];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success, error
+  const [topics, setTopics] = useState(BASE_TOPICS);
+  const [picked, setPicked] = useState([]);
+  const [form, setForm] = useState({ name: '', email: '', store: '', message: '' });
+  const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  useEffect(() => {
+    const onPrefill = (e) => {
+      const topic = e.detail;
+      setTopics((t) => (t.includes(topic) ? t : [...t, topic]));
+      setPicked((p) => (p.includes(topic) ? p : [...p, topic]));
+    };
+    window.addEventListener('prefill-contact', onPrefill);
+    return () => window.removeEventListener('prefill-contact', onPrefill);
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const toggle = (t) => setPicked((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    setFormStatus('sending');
-
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset status after 3 seconds
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 2000);
+    const subject = `Shopify project${picked.length ? `: ${picked.join(', ')}` : ''} (from ${form.name})`;
+    const body = [
+      `Hi Suhail,`,
+      ``,
+      form.message,
+      ``,
+      `Store: ${form.store || 'n/a'}`,
+      `Interested in: ${picked.join(', ') || 'n/a'}`,
+      ``,
+      `${form.name}`,
+      `${form.email}`
+    ].join('\n');
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
   };
 
-  const contactInfo = [
-    {
-      icon: FaEnvelope,
-      title: 'Email',
-      value: 'suhail.codes99@gmail.com',
-      link: 'mailto:suhail.codes99@gmail.com'
-    },
-    {
-      icon: FaPhone,
-      title: 'Phone',
-      value: '+917736132338',
-      link: 'tel:+917736132338'
-    },
-    {
-      icon: FaMapMarkerAlt,
-      title: 'Location',
-      value: 'Available Worldwide',
-      link: '#'
-    }
-  ];
-
-  const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/suhail-zenic', label: 'GitHub' },
-    {
-      icon: FaLinkedin,
-      href: 'https://www.linkedin.com/in/suhail-majeed-449478369',
-      label: 'LinkedIn'
-    },
-    { icon: FaTwitter, href: 'https://x.com/suhailzenic', label: 'X' },
-    { icon: FaInstagram, href: 'https://www.instagram.com/suhailx777', label: 'Instagram' }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* clipboard unavailable */
     }
   };
 
   return (
-    <section id="contact" className="contact section">
+    <section id="contact" className="section contact">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Contact</h2>
-          <p className="section-subtitle">Shopify scopes, timelines, and whether you need a dev or a different partner</p>
-        </motion.div>
+        <motion.div className="contact__panel" {...reveal}>
+          <div className="contact__intro">
+            <span className="eyebrow eyebrow--light">Contact</span>
+            <h2>
+              Let&apos;s make your store <em className="serif-accent">easier to love.</em>
+            </h2>
+            <p>
+              A store link, your role and what&apos;s on fire is plenty for a first reply. For bugs, add the steps to
+              reproduce and whether it happens on Dawn or a custom theme.
+            </p>
 
-        <div className="contact-content">
-          <motion.div
-            className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="contact-intro">
-              <h3>Tell me about the store</h3>
-              <p>
-                A myshopify.com link, your role, and what is on fire is enough for a first reply. If it is a bug, add
-                steps to reproduce and whether it happens on Dawn or a custom theme. I work across time zones but keep
-                response windows honest in the first email back.
-              </p>
-            </div>
+            <ul className="contact__lines">
+              <li>
+                <FiMail aria-hidden />
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <button type="button" className="mini-btn" onClick={copyEmail} aria-label="Copy email address">
+                  {copied ? <FiCheck /> : <FiCopy />}
+                  <span>{copied ? 'Copied' : 'Copy'}</span>
+                </button>
+              </li>
+              <li>
+                <FiPhone aria-hidden />
+                <a href={`tel:${PHONE}`}>+91 77361 32338</a>
+              </li>
+              <li>
+                <FiGlobe aria-hidden />
+                <span>Remote, working with merchants worldwide</span>
+              </li>
+            </ul>
 
-            <motion.div
-              className="contact-details"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.title}
-                  className="contact-item"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="contact-icon">
-                    <info.icon />
-                  </div>
-                  <div className="contact-detail">
-                    <h4>{info.title}</h4>
-                    <a href={info.link}>{info.value}</a>
-                  </div>
-                </motion.div>
+            <div className="socials">
+              {SOCIALS.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="social">
+                  <s.icon />
+                </a>
               ))}
-            </motion.div>
+            </div>
+          </div>
 
-            <motion.div
-              className="social-links"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h4>Elsewhere</h4>
-              <div className="social-icons">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="social-link"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 + index * 0.1 }}
+          <form className="form" onSubmit={onSubmit}>
+            <fieldset className="form__topics">
+              <legend>What can I help with?</legend>
+              <div className="chips">
+                {topics.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    className={`chip chip--form ${picked.includes(t) ? 'is-active' : ''}`}
+                    aria-pressed={picked.includes(t)}
+                    onClick={() => toggle(t)}
                   >
-                    <social.icon />
-                  </motion.a>
+                    {picked.includes(t) && <FiCheck aria-hidden />}
+                    {t}
+                  </button>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </fieldset>
 
-          <motion.div
-            className="contact-form-container"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
+            <div className="form__row">
+              <label className="field">
+                <span>Your name</span>
+                <input name="name" value={form.name} onChange={onChange} required autoComplete="name" placeholder="Jane Doe" />
+              </label>
+              <label className="field">
+                <span>Email</span>
                 <input
                   type="email"
                   name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  value={form.email}
+                  onChange={onChange}
                   required
+                  autoComplete="email"
+                  placeholder="jane@brand.com"
                 />
-              </div>
+              </label>
+            </div>
 
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="e.g. Migration from Woo, PDP metafields, checkout bug"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+            <label className="field">
+              <span>
+                Store URL <em>(optional)</em>
+              </span>
+              <input name="store" value={form.store} onChange={onChange} placeholder="yourstore.myshopify.com" />
+            </label>
 
-              <div className="form-group">
-                <textarea
-                  name="message"
-                  placeholder="Store URL, Shopify plan, what you have tried, deadline if any"
-                  rows="5"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+            <label className="field">
+              <span>Tell me a little more</span>
+              <textarea
+                name="message"
+                rows={4}
+                value={form.message}
+                onChange={onChange}
+                required
+                placeholder="What you've tried, your Shopify plan and any deadline"
+              />
+            </label>
 
-              <motion.button
-                type="submit"
-                className={`btn btn-primary form-submit ${formStatus}`}
-                disabled={formStatus === 'sending'}
-                whileHover={{ scale: formStatus === 'sending' ? 1 : 1.05 }}
-                whileTap={{ scale: formStatus === 'sending' ? 1 : 0.95 }}
-              >
-                {formStatus === 'sending' && (
-                  <motion.div
-                    className="spinner"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  />
-                )}
-                {formStatus === 'success' && <FaCheckCircle />}
-                {formStatus === 'error' && <FaExclamationCircle />}
-                {formStatus === 'idle' && <FaPaperPlane />}
-                {formStatus === 'sending' && 'Sending...'}
-                {formStatus === 'success' && 'Message Sent!'}
-                {formStatus === 'error' && 'Try Again'}
-                {formStatus === 'idle' && 'Send Message'}
-              </motion.button>
-
-              {formStatus === 'success' && (
-                <motion.div
-                  className="form-success"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <FaCheckCircle />
-                  <span>Thank you! Your message has been sent successfully.</span>
-                </motion.div>
+            <button type="submit" className="btn btn--accent btn--lg btn--block">
+              {sent ? (
+                <>
+                  <FiCheck /> Opening your email app…
+                </>
+              ) : (
+                <>
+                  Send message <FiSend />
+                </>
               )}
-            </form>
-          </motion.div>
-        </div>
+            </button>
+            <p className="form__hint">
+              This opens your email app with everything filled in, so nothing gets lost in a form inbox.
+            </p>
+          </form>
+        </motion.div>
       </div>
     </section>
   );

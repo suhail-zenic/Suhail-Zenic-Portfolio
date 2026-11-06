@@ -1,233 +1,138 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaUser, FaArrowRight, FaTag } from 'react-icons/fa';
+import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SectionHeader, startProject } from './utils';
+
+const POSTS = [
+  {
+    id: 1,
+    title: 'When a metafield should be a metaobject',
+    excerpt:
+      'A rule of thumb for merchandising data that’s reused across PDP, PLP and cart, and how to keep the editor experience sane.',
+    category: 'Platform',
+    date: 'Jan 8, 2026',
+    readTime: '6 min',
+    tags: ['Metafields', 'Metaobjects', 'Editor UX']
+  },
+  {
+    id: 2,
+    title: 'Cart.js is not a trash can',
+    excerpt:
+      'Why stacking third-party cart drawers breaks discounts, and how I sequence subscription apps, free gifts and Shopify Functions.',
+    category: 'Themes',
+    date: 'Dec 18, 2025',
+    readTime: '7 min',
+    tags: ['Cart', 'Subscriptions', 'Apps']
+  },
+  {
+    id: 3,
+    title: '301 maps that survive migrations',
+    excerpt:
+      'What I export before DNS flips, how I test redirects with real query strings, and the Search Console checks I run after go-live.',
+    category: 'Ops',
+    date: 'Dec 2, 2025',
+    readTime: '8 min',
+    tags: ['Migration', 'SEO', 'Redirects']
+  },
+  {
+    id: 4,
+    title: 'Webhook retries that don’t double-charge',
+    excerpt:
+      'Idempotency keys, HMAC verification and the boring logging that keeps Ops calm when Shopify replays orders/updated at 2 a.m.',
+    category: 'Apps',
+    date: 'Nov 20, 2025',
+    readTime: '9 min',
+    tags: ['Webhooks', 'Node', 'Reliability']
+  },
+  {
+    id: 5,
+    title: 'Removing scripts without breaking pixels',
+    excerpt:
+      'A practical pass for legacy scripts, consent banners and tag managers, measured on hardware your customers actually use.',
+    category: 'Themes',
+    date: 'Nov 6, 2025',
+    readTime: '6 min',
+    tags: ['Performance', 'Pixels', 'Privacy']
+  },
+  {
+    id: 6,
+    title: 'B2B catalogs: what to lock first',
+    excerpt:
+      'Company locations vs. tags, how price lists interact with retail promos, and the Liquid guards that keep wholesale and retail apart.',
+    category: 'Platform',
+    date: 'Oct 22, 2025',
+    readTime: '10 min',
+    tags: ['B2B', 'Plus', 'Liquid']
+  }
+];
+
+const CATEGORIES = ['All', 'Themes', 'Platform', 'Apps', 'Ops'];
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'When a metafield should be a metaobject',
-      excerpt:
-        'A quick rule of thumb for merchandising data that needs to be reused across PDP, PLP, and cart—and how to keep the editor experience sane.',
-      category: 'Platform',
-      author: 'Suhail Majeed',
-      date: 'Jan 8, 2026',
-      readTime: '6 min read',
-      coverTopic: 'Metafields',
-      accent: '#5c8f3e',
-      tags: ['Metafields', 'Metaobjects', 'Editor UX'],
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Cart.js is not a trash can',
-      excerpt:
-        'Why stacking third-party cart drawers breaks discounts, and how I sequence subscription apps, free gifts, and Shopify Functions without fighting the core cart.',
-      category: 'Themes',
-      author: 'Suhail Majeed',
-      date: 'Dec 18, 2025',
-      readTime: '7 min read',
-      coverTopic: 'Cart',
-      accent: '#6366f1',
-      tags: ['Cart', 'Subscriptions', 'Apps'],
-      featured: false
-    },
-    {
-      id: 3,
-      title: '301 maps that survive migrations',
-      excerpt:
-        'What I export before DNS flips, how I test redirects with real query strings, and the Search Console checks I run the week after go-live.',
-      category: 'Ops',
-      author: 'Suhail Majeed',
-      date: 'Dec 2, 2025',
-      readTime: '8 min read',
-      coverTopic: 'Redirects',
-      accent: '#d97706',
-      tags: ['Migration', 'SEO', 'Redirects'],
-      featured: true
-    },
-    {
-      id: 4,
-      title: 'Webhook retries that do not double-charge',
-      excerpt:
-        'Idempotency keys, HMAC verification, and the boring logging that keeps Ops calm when Shopify replays `orders/updated` at 2 a.m.',
-      category: 'Apps',
-      author: 'Suhail Majeed',
-      date: 'Nov 20, 2025',
-      readTime: '9 min read',
-      coverTopic: 'Webhooks',
-      accent: '#0d9488',
-      tags: ['Webhooks', 'Node', 'Reliability'],
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'Removing scripts without breaking pixels',
-      excerpt:
-        'A practical pass for legacy checkout scripts, consent banners, and tag managers—measured on hardware your customers actually use.',
-      category: 'Themes',
-      author: 'Suhail Majeed',
-      date: 'Nov 6, 2025',
-      readTime: '6 min read',
-      coverTopic: 'Performance',
-      accent: '#7c3aed',
-      tags: ['Performance', 'Pixels', 'Privacy'],
-      featured: false
-    },
-    {
-      id: 6,
-      title: 'B2B catalogs: what to lock first',
-      excerpt:
-        'Company locations vs. tags, how price lists interact with retail promos, and the small Liquid guards that stop wholesale buyers seeing consumer-only merch.',
-      category: 'Platform',
-      author: 'Suhail Majeed',
-      date: 'Oct 22, 2025',
-      readTime: '10 min read',
-      coverTopic: 'B2B',
-      accent: '#2563eb',
-      tags: ['B2B', 'Plus', 'Liquid'],
-      featured: true
-    }
-  ];
-
-  const categories = ['All', 'Themes', 'Platform', 'Apps', 'Ops'];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
+  const [cat, setCat] = useState('All');
+  const list = useMemo(() => (cat === 'All' ? POSTS : POSTS.filter((p) => p.category === cat)), [cat]);
 
   return (
-    <section id="blog" className="blog section">
+    <section id="blog" className="section">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Shopify notes</h2>
-          <p className="section-subtitle">Short writeups I send to clients—published here when they age out of the inbox</p>
-        </motion.div>
+        <div className="section-head-row">
+          <SectionHeader eyebrow="Field notes" title="Things I've" accent="learned the hard way">
+            Short write-ups I share with clients. Full posts are on the way.
+          </SectionHeader>
+          <div className="chips" role="group" aria-label="Filter notes">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                type="button"
+                className={`chip ${cat === c ? 'is-active' : ''}`}
+                aria-pressed={cat === c}
+                onClick={() => setCat(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        <motion.div
-          className="blog-categories"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              type="button"
-              className="category-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaTag />
-              {category}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="blog-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {blogPosts.map((post) => (
-            <motion.article
-              key={post.id}
-              className={`blog-card ${post.featured ? 'featured' : ''}`}
-              variants={itemVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="blog-image" style={{ '--note-accent': post.accent }}>
-                <div className="blog-cover" aria-hidden>
-                  <span className="blog-cover-num">{String(post.id).padStart(2, '0')}</span>
-                  <span className="blog-cover-topic">{post.coverTopic}</span>
+        <motion.ul className="notes" layout>
+          <AnimatePresence mode="popLayout">
+            {list.map((p) => (
+              <motion.li
+                key={p.id}
+                layout
+                className="note"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="note__num mono">{String(p.id).padStart(2, '0')}</span>
+                <div className="note__body">
+                  <div className="note__meta mono">
+                    <span className="note__cat">{p.category}</span>
+                    <span>{p.date}</span>
+                    <span>{p.readTime} read</span>
+                  </div>
+                  <h3>{p.title}</h3>
+                  <p>{p.excerpt}</p>
                 </div>
-                <div className="blog-category-badge">{post.category}</div>
-                {post.featured && <div className="featured-badge">Featured</div>}
-              </div>
-
-              <div className="blog-content">
-                <div className="blog-meta">
-                  <div className="meta-item">
-                    <FaCalendarAlt />
-                    <span>{post.date}</span>
-                  </div>
-                  <div className="meta-item">
-                    <FaUser />
-                    <span>{post.author}</span>
-                  </div>
-                  <div className="meta-item">
-                    <span>{post.readTime}</span>
-                  </div>
-                </div>
-
-                <h3 className="blog-title">{post.title}</h3>
-                <p className="blog-excerpt">{post.excerpt}</p>
-
-                <div className="blog-tags">
-                  {post.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="blog-tag">
-                      {tag}
+                <div className="note__tags">
+                  {p.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
                     </span>
                   ))}
                 </div>
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </motion.ul>
 
-                <motion.button type="button" className="blog-read-more" whileTap={{ scale: 0.98 }}>
-                  Read draft
-                  <FaArrowRight />
-                </motion.button>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="blog-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="cta-content">
-            <h3>Want these as a newsletter?</h3>
-            <p>Not running one yet—if enough people ask, I will ship a monthly Shopify-only digest.</p>
-            <motion.button
-              type="button"
-              className="btn btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Ping me about it
-            </motion.button>
-          </div>
-        </motion.div>
+        <p className="notes__cta">
+          Want these as a monthly Shopify digest?{' '}
+          <button type="button" className="link-btn" onClick={() => startProject('Newsletter: count me in')}>
+            Let me know →
+          </button>
+        </p>
       </div>
     </section>
   );

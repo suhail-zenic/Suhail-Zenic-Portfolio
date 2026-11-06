@@ -1,178 +1,118 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import {
-  FaShopify,
-  FaCode,
-  FaDatabase,
-  FaPlug,
-  FaTachometerAlt,
-  FaLayerGroup
-} from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiLayers, FiDatabase, FiCpu, FiActivity } from 'react-icons/fi';
+import { SectionHeader, reveal } from './utils';
+
+const CATEGORIES = [
+  {
+    key: 'storefront',
+    title: 'Themes & storefront',
+    icon: FiLayers,
+    blurb: 'Layouts that survive real catalogs, promos and mobile traffic, not just the mockups.',
+    skills: [
+      { name: 'Liquid & OS 2.0 sections', level: 95 },
+      { name: 'JSON templates & navigation', level: 90 },
+      { name: 'Cart, discounts & line item properties', level: 88 },
+      { name: 'Storefront API & headless handoffs', level: 82 }
+    ]
+  },
+  {
+    key: 'platform',
+    title: 'Admin & data',
+    icon: FiDatabase,
+    blurb: 'Clean content models so merchandisers can move fast without calling a developer.',
+    skills: [
+      { name: 'Metafields & metaobjects', level: 92 },
+      { name: 'Markets, taxes & selling internationally', level: 85 },
+      { name: 'Shopify Flow & automation', level: 84 },
+      { name: 'B2B catalogs & price lists', level: 80 }
+    ]
+  },
+  {
+    key: 'apps',
+    title: 'Apps & backend',
+    icon: FiCpu,
+    blurb: 'ERP, 3PL, subscriptions and email: fewer moving parts and clear ownership when something breaks.',
+    skills: [
+      { name: 'Webhooks & idempotent workers', level: 90 },
+      { name: 'Admin GraphQL & bulk operations', level: 88 },
+      { name: 'Private apps & middleware', level: 86 },
+      { name: 'App Bridge & embedded admin UX', level: 82 }
+    ]
+  },
+  {
+    key: 'delivery',
+    title: 'Launch quality',
+    icon: FiActivity,
+    blurb: 'I trim scripts, fix render-blocking paths and retest after every app install.',
+    skills: [
+      { name: 'Core Web Vitals on the theme', level: 88 },
+      { name: 'Theme Check & CI for Liquid', level: 85 },
+      { name: 'Analytics, pixels & consent', level: 83 },
+      { name: 'Checkout extensibility', level: 78 }
+    ]
+  }
+];
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('storefront');
-
-  const skillCategories = {
-    storefront: {
-      title: 'Themes & storefront',
-      icon: FaLayerGroup,
-      skills: [
-        { name: 'Liquid & OS 2.0 sections', level: 95, icon: FaCode, color: '#96bf48' },
-        { name: 'JSON templates & navigation', level: 90, icon: FaShopify, color: '#96bf48' },
-        { name: 'Cart, discounts, and line item properties', level: 88, icon: FaShopify, color: '#96bf48' },
-        { name: 'Storefront API & headless handoffs', level: 82, icon: FaCode, color: '#96bf48' }
-      ]
-    },
-    platform: {
-      title: 'Merchant admin & data',
-      icon: FaDatabase,
-      skills: [
-        { name: 'Metafields & metaobjects', level: 92, icon: FaDatabase, color: '#5c8f3e' },
-        { name: 'Markets, taxes, and selling internationally', level: 85, icon: FaShopify, color: '#5c8f3e' },
-        { name: 'B2B catalogs & price lists', level: 80, icon: FaShopify, color: '#5c8f3e' },
-        { name: 'Shopify Flow & automation', level: 84, icon: FaShopify, color: '#5c8f3e' }
-      ]
-    },
-    apps: {
-      title: 'Apps & custom backend',
-      icon: FaShopify,
-      skills: [
-        { name: 'Admin GraphQL & bulk operations', level: 88, icon: FaShopify, color: '#6366f1' },
-        { name: 'Webhooks & idempotent workers', level: 90, icon: FaCode, color: '#6366f1' },
-        { name: 'App Bridge & embedded admin UX', level: 82, icon: FaShopify, color: '#6366f1' },
-        { name: 'Private apps & middleware', level: 86, icon: FaPlug, color: '#6366f1' }
-      ]
-    },
-    delivery: {
-      title: 'Launch quality',
-      icon: FaTachometerAlt,
-      skills: [
-        { name: 'Core Web Vitals on the theme', level: 88, icon: FaTachometerAlt, color: '#0d9488' },
-        { name: 'Theme Check & CI for Liquid', level: 85, icon: FaCode, color: '#0d9488' },
-        { name: 'Analytics, pixels, and consent', level: 83, icon: FaPlug, color: '#0d9488' },
-        { name: 'Checkout extensibility (where applicable)', level: 78, icon: FaShopify, color: '#0d9488' }
-      ]
-    }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
+  const [active, setActive] = useState(CATEGORIES[0].key);
+  const cat = CATEGORIES.find((c) => c.key === active);
 
   return (
-    <section id="skills" className="skills section">
+    <section id="skills" className="section section--tint">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="section-title">Shopify stack</h2>
-          <p className="section-subtitle">Where I spend time on a typical build</p>
-        </motion.div>
+        <SectionHeader eyebrow="Toolbox" title="My Shopify" accent="stack">
+          Where my time goes on a typical build. Pick a lane to see the details.
+        </SectionHeader>
 
-        <motion.div
-          className="skills-categories"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {Object.keys(skillCategories).map((categoryKey) => (
-            <motion.button
-              key={categoryKey}
-              type="button"
-              className={`category-btn ${activeCategory === categoryKey ? 'active' : ''}`}
-              onClick={() => setActiveCategory(categoryKey)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {React.createElement(skillCategories[categoryKey].icon)}
-              <span>{skillCategories[categoryKey].title}</span>
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="skills-content"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div className="skills-grid" variants={itemVariants}>
-            {skillCategories[activeCategory].skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                className="skill-card"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.2 }}
+        <motion.div className="stack" {...reveal}>
+          <div className="stack__tabs" role="tablist" aria-label="Skill categories">
+            {CATEGORIES.map((c, i) => (
+              <button
+                key={c.key}
+                type="button"
+                role="tab"
+                aria-selected={active === c.key}
+                className={`stack__tab ${active === c.key ? 'is-active' : ''}`}
+                onClick={() => setActive(c.key)}
               >
-                <div className="skill-header">
-                  <div className="skill-icon" style={{ color: skill.color }}>
-                    <skill.icon />
-                  </div>
-                  <div className="skill-info">
-                    <h4>{skill.name}</h4>
-                    <span className="skill-percentage">{skill.level}%</span>
-                  </div>
-                </div>
-                <div className="skill-bar">
-                  <motion.div
-                    className="skill-progress"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    style={{ backgroundColor: skill.color }}
-                  />
-                </div>
-              </motion.div>
+                <span className="mono">0{i + 1}</span>
+                <c.icon />
+                <span>{c.title}</span>
+              </button>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
 
-        <motion.div
-          className="skills-highlights"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="highlight-card">
-            <FaShopify className="highlight-icon" />
-            <h3>Theme work</h3>
-            <p>Layouts that survive real catalogs, promos, and mobile traffic—not just the mockups.</p>
-          </div>
-          <div className="highlight-card">
-            <FaPlug className="highlight-icon" />
-            <h3>Integrations</h3>
-            <p>ERP, 3PL, subscriptions, and email: fewer moving parts, clearer ownership when something breaks.</p>
-          </div>
-          <div className="highlight-card">
-            <FaTachometerAlt className="highlight-icon" />
-            <h3>Speed &amp; stability</h3>
-            <p>Lighthouse and field data matter; I trim scripts, fix render-blocking paths, and retest after every app install.</p>
+          <div className="card stack__panel" role="tabpanel">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={cat.key}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+              >
+                <p className="stack__blurb">{cat.blurb}</p>
+                <ul className="meters">
+                  {cat.skills.map((s, i) => (
+                    <li key={s.name} className="meter">
+                      <div className="meter__row">
+                        <span>{s.name}</span>
+                        <span className="mono">{s.level}</span>
+                      </div>
+                      <div className="meter__track">
+                        <motion.div
+                          className="meter__fill"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${s.level}%` }}
+                          transition={{ duration: 0.9, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
